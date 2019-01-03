@@ -17,9 +17,9 @@ ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openj
 ENV JAVA_VERSION 8u181
 ENV JAVA_ALPINE_VERSION 8.181.13-r0
 
-RUN set -x &&\
-  apk add --no-cache ttf-freefont openjdk8="$JAVA_ALPINE_VERSION" && \
+RUN set -x && \
+  apk --no-cache add ttf-freefont openjdk8="$JAVA_ALPINE_VERSION" && \
+  rm -rf /var/cache/apk/* && \
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   echo "Asia/Shanghai" > /etc/timezone && \
-  rm -rf /var/cache/apk && \
   [ "$JAVA_HOME" = "$(docker-java-home)" ]
