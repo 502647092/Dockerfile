@@ -18,8 +18,8 @@ ENV JAVA_VERSION 8u191
 ENV JAVA_ALPINE_VERSION 8.191.12-r0
 
 RUN set -x && \
-  apk --no-cache add ttf-freefont openjdk8="$JAVA_ALPINE_VERSION" && \
+  apk --no-cache add ttf-freefont tzdata ca-certificates openjdk8="$JAVA_ALPINE_VERSION" && \
+  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/* && \
-  ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   echo "Asia/Shanghai" > /etc/timezone && \
   [ "$JAVA_HOME" = "$(docker-java-home)" ]
