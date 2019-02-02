@@ -1,4 +1,4 @@
-FROM miaowoo/openjdk:8u181
+FROM miaowoo/openjdk:8u191
 
 EXPOSE 8080
 
