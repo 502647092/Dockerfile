@@ -5,8 +5,11 @@ EXPOSE 3000
 
 ADD package.json ./
 
-RUN apk add --no-cache nodejs yarn curl python make gcc g++ go
+RUN apk add --no-cache nodejs yarn curl python make gcc g++ git go
 RUN yarn global add node-gyp && yarn --cache-folder ./ycache && rm -rf ./ycache
+
+ENV GOPATH /home/theia/go
+
 RUN set -ex && \
     go get -u -v github.com/ramya-rao-a/go-outline && \
     go get -u -v github.com/acroca/go-symbols && \
@@ -26,7 +29,5 @@ RUN set -ex && \
     go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct \
     mkdir -p /home/theia/.go && \
     echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
-
-ENV GOPATH /home/project
 
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
