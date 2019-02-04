@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:v3.8
 
 WORKDIR /home/theia
 EXPOSE 3000
