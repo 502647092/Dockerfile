@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:v3.8
 
 WORKDIR /home/theia
 EXPOSE 3000
@@ -30,4 +30,4 @@ RUN set -ex && \
 
 RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
 
-ENTRYPOINT [ "/bin/true" ]
+CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
