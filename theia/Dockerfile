@@ -26,8 +26,8 @@ RUN set -ex && \
     go get -u -v golang.org/x/tools/cmd/guru && \
     go get -u -v github.com/josharian/impl && \
     go get -u -v github.com/haya14busa/goplay/cmd/goplay && \
-    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct \
-    mkdir -p /home/theia/.go && \
-    echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
+    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
+
+RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
 
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
