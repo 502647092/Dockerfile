@@ -30,4 +30,4 @@ RUN set -ex && \
 
 RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
 
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
