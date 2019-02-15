@@ -143,7 +143,6 @@ RUN chmod g+rw /home && \
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential
 
-USER theia
 ARG version=latest
 WORKDIR /home/theia
 ADD full.package.json ./package.json
