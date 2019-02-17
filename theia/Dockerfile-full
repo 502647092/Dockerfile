@@ -143,6 +143,11 @@ RUN chmod g+rw /home && \
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential
 
+#Zsh
+RUN apt-get update && apt-get install -y zsh && \
+    git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+
 ARG version=latest
 WORKDIR /home/theia
 ADD full.package.json ./package.json
@@ -151,6 +156,6 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
 EXPOSE 3000
-ENV SHELL /bin/bash
+ENV SHELL /bin/zsh
 
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
