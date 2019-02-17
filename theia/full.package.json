@@ -17,6 +17,7 @@
         "@theia/getting-started": "next",
         "@theia/java": "next",
         "@theia/json": "next",
+        "@theia/yaml": "next",
         "@theia/keymaps": "next",
         "@theia/languages": "next",
         "@theia/markers": "next",
@@ -48,8 +49,7 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next",
-        "theia-yaml-extension": "next"
+        "theia-yang-extension": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
