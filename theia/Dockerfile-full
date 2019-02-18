@@ -152,7 +152,8 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 
 # Add Lombok Support
 RUN wget -O/home/theia/lib/lombok.jar https://github.com/GabrielBB/vscode-lombok/raw/master/server/lombok.jar && \
-  sed -i s@\'-Declipse.application=org.eclipse.jdt.ls.core.id1\',@\'-Declipse.application=org.eclipse.jdt.ls.core.id1\',\'-javaagent:/home/theia/lib/lombok.jar\',@g /home/theia/node_modules/@theia/java/src/node/java-contribution.ts
+  sed -i s@core.id1\',@core.id1\',\'-javaagent:/home/theia/lib/lombok.jar\',@g /home/theia/node_modules/@theia/java/src/node/java-contribution.ts && \
+  sed -i s@core.id1\',@core.id1\',\'-javaagent:/home/theia/lib/lombok.jar\',@g /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
