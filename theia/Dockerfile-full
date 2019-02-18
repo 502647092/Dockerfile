@@ -67,15 +67,10 @@ RUN set -ex \
 
 #Developer tools
 
-## Git and sudo (sudo needed for user override)
-RUN apt-get -y install git sudo
-
-#LSPs
-
 ##GO
 
 #Required to use go get with git source
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git sudo
 
 ENV GO_VERSION 1.11.5
 ENV GOPATH=/home/theia/go
@@ -83,27 +78,28 @@ ENV GO_ROOT=/usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 ENV PATH $PATH:${GOPATH}/bin
 
-RUN curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
-RUN go get -u -v github.com/mdempsky/gocode
-RUN go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs
-RUN go get -u -v github.com/ramya-rao-a/go-outline
-RUN go get -u -v github.com/acroca/go-symbols
-RUN go get -u -v golang.org/x/tools/cmd/guru
-RUN go get -u -v golang.org/x/tools/cmd/gorename
-RUN go get -u -v github.com/derekparker/delve/cmd/dlv
-RUN go get -u -v github.com/stamblerre/gocode
-RUN go get -u -v github.com/rogpeppe/godef
-RUN go get -u -v github.com/sqs/goreturns
-RUN go get -u -v golang.org/x/lint/golint
-RUN go get -u -v github.com/cweill/gotests/...
-RUN go get -u -v github.com/fatih/gomodifytags
-RUN go get -u -v github.com/josharian/impl
-RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
-RUN go get -u -v github.com/haya14busa/goplay/cmd/goplay
+RUN set -ex && \
+  curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
+  go get -u -v github.com/mdempsky/gocode && \
+  go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
+  go get -u -v github.com/ramya-rao-a/go-outline && \
+  go get -u -v github.com/acroca/go-symbols && \
+  go get -u -v golang.org/x/tools/cmd/guru && \
+  go get -u -v golang.org/x/tools/cmd/gorename && \
+  go get -u -v github.com/derekparker/delve/cmd/dlv && \
+  go get -u -v github.com/stamblerre/gocode && \
+  go get -u -v github.com/rogpeppe/godef && \
+  go get -u -v github.com/sqs/goreturns && \
+  go get -u -v golang.org/x/lint/golint && \
+  go get -u -v github.com/cweill/gotests/... && \
+  go get -u -v github.com/fatih/gomodifytags && \
+  go get -u -v github.com/josharian/impl && \
+  go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct && \
+  go get -u -v github.com/haya14busa/goplay/cmd/goplay
 
 #Java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN apt-get update && apt-get -y install openjdk-8-jdk
+RUN apt-get update && apt-get -y install openjdk-8-jdk maven
 
 #C/C++
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
@@ -126,8 +122,7 @@ RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && rm composer-setup.php
 
 #Ruby
-RUN apt-get -y install ruby ruby-dev zlib1g-dev
-RUN gem install solargraph
+RUN apt-get -y install ruby ruby-dev zlib1g-dev && gem install solargraph
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
@@ -141,10 +136,7 @@ RUN chmod g+rw /home && \
 
 #Theia
 ##Needed for node-gyp, nsfw build
-RUN apt-get update && apt-get install -y python build-essential
-
-#Zsh
-RUN apt-get update && apt-get install -y zsh && \
+RUN apt-get update && apt-get install -y python build-essential zsh && \
     git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
@@ -154,7 +146,7 @@ ADD full.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
-RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
+# RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/zsh
 
