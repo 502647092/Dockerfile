@@ -136,12 +136,13 @@ RUN chmod g+rw /home && \
 
 #Theia
 ##Needed for node-gyp, nsfw build
-RUN apt-get update && apt-get install -y python build-essential zsh tmux && \
+RUN apt-get update && apt-get install -y python build-essential zsh tmux nano && \
     mkdir ~/.tmux && \
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
     wget -qO- https://blog.yumc.pw/attachment/conf/tmux.conf > ~/.tmux.conf && \
     git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
+    sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc
 
 ARG version=latest
 WORKDIR /home/theia
