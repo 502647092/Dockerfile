@@ -143,12 +143,12 @@ RUN apt-get update && apt-get install -y python build-essential zsh tmux nano &&
     ~/.tmux/plugins/tpm/bin/install_plugins && \
     git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
-    sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc
+    sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
 
-ARG version=latest
 WORKDIR /home/theia
 ADD full.package.json ./package.json
-ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 
 # Add Lombok Support
