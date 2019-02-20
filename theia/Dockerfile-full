@@ -153,7 +153,7 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 
 # Add Lombok Support
 RUN mkdir -p /home/theia/java && \
-  wget -O/home/theia/java/lombok.jar https://github.com/GabrielBB/vscode-lombok/raw/master/server/lombok.jar && \
+  wget -qO/home/theia/java/lombok.jar https://github.com/GabrielBB/vscode-lombok/raw/master/server/lombok.jar && \
   sed -i s@core.id1\',@core.id1\',\'-javaagent:/home/theia/java/lombok.jar\',@g /home/theia/node_modules/@theia/java/src/node/java-contribution.ts && \
   sed -i s@core.id1\',@core.id1\',\'-javaagent:/home/theia/java/lombok.jar\',@g /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
