@@ -1,0 +1,17 @@
+FROM node:8.15.0-alpine
+LABEL maintainer="admin@yumc.pw(MiaoWoo)"
+
+RUN apk add git yarn --no-cache
+
+WORKDIR /app
+
+RUN git clone https://github.com/thx/rap2-dolores.git /app
+RUN npm install && npm install -g serve
+RUN sed -i s@serve:.*@serve:\ \'/api\',@g src/config/config.prod.js
+RUN npm run build
+
+ENV NODE_ENV=production
+
+EXPOSE 5000
+
+CMD ["serve", "-s", "build", "-p", "5000"]
