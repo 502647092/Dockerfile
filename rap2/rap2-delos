@@ -6,7 +6,7 @@ RUN apk add git yarn --no-cache
 WORKDIR /app
 
 RUN git clone https://github.com/thx/rap2-delos.git /app
-RUN npm config set registry https://repo.i.sixi.com/repository/taobao && npm install && npm install -g typescript
+RUN npm install && npm install -g typescript
 RUN sed -i s@\"noImplicitAny\":\ true@\"noImplicitAny\":\ false@g tsconfig.json
 RUN npm run build
 
