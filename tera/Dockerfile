@@ -9,4 +9,4 @@ RUN yarn
 
 EXPOSE 8080
 
-CMD node set httpport:8080 password:${PASSWD} && node run-node.js
+CMD node set httpport:${PORT} password:${PASSWD} && node run-node.js
