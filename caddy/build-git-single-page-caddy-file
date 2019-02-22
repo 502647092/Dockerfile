@@ -1,0 +1,23 @@
+cat <<EOF
+:${CADDY_PORT:-80} {
+  root ${CADDY_ROOT:-/root}
+  proxy ${CADDY_API_PATH:-/api} ${CADDY_API_URL:-${CADDY_API_SCHEME:-http}://${CADDY_API:-api}} {
+    without ${CADDY_API_PATH:-/api}
+    header_upstream Host ${CADDY_API_HOST:-{host}}
+    header_upstream X-Real-IP {remote}
+    header_upstream X-Forwarded-For {remote}
+    header_upstream X-Forwarded-Proto {scheme}
+  }
+  rewrite {
+    if {path} not_starts_with ${CADDY_API_PATH:-/api}
+    to {path} /
+  }
+  git {
+	key ${CADDY_GIT_KEY:-/ssh/id_rsa}
+    repo ${CADDY_GIT_URL}
+    branch ${CADDY_GIT_BRANCH:-master}
+    path ${CADDY_ROOT:-/root}
+    hook ${CADDY_HOOK_PATH:-/webhook} ${CADDY_HOOK_SECRET:-miaowoo}
+  }
+}
+EOF
