@@ -7,6 +7,8 @@ RUN git clone https://gitlab.com/terafoundation/tera.git /app
 WORKDIR /app/Source
 RUN yarn
 
-EXPOSE 8080
+ENV PORT 80
+ENV PASSWD 123456
+EXPOSE 80
 
 CMD node set httpport:${PORT} password:${PASSWD} && node run-node.js
