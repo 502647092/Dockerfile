@@ -7,6 +7,8 @@ RUN git clone https://git.yumc.pw/502647092/tera.git /app
 WORKDIR /app/Source
 RUN yarn config set registry https://repo.yumc.pw/repository/npm-taobao && yarn
 
-EXPOSE 8080
+ENV PORT 80
+ENV PASSWD 123456
+EXPOSE 80
 
-CMD node set httpport:8080 password:${PASSWD} && node run-node.js
+CMD node set httpport:${PORT} password:${PASSWD} && node run-node.js
