@@ -1,8 +1,16 @@
 FROM miaowoo/node-tini:8.15.0-alpine
 LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 
-RUN apk add git python
-RUN git clone https://gitlab.com/terafoundation/tera.git /app
+RUN set -x && \
+  apk add python tzdata && \
+  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+  rm -rf /var/cache/apk/* && \
+  echo "Asia/Shanghai" > /etc/timezone && \
+  ntpd -dnp ntp1.aliyun.com && \
+  wget https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz && \
+  tar -xvzf tera-master.tar.gz && \
+  rm -rf tera-master.tar.gz && \
+  mv tera-master /app
 
 WORKDIR /app/Source
 RUN yarn
