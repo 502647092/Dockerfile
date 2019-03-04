@@ -132,7 +132,7 @@ RUN adduser --disabled-password --gecos '' theia && \
 RUN chmod g+rw /home && \
   mkdir -p /home/project && \
   chown -R theia:theia /home/theia && \
-  chown -R theia:theia /home/project; && \
+  chown -R theia:theia /home/project && \
   rm -rf ~/.theia && \
   ln -sf /home/project/.theia ~/.theia
 
