@@ -112,14 +112,12 @@ RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt
 RUN apt-get update && apt-get install -y clang-tools-9
 RUN ln -s /usr/bin/clangd-9 /usr/bin/clangd
 
-#TZDATA
-RUN apt-get install -y tzdata
-
 #Python 2
 RUN apt-get update && apt-get install -y python python-pip && \
 pip install python-language-server;
 
 #PHP
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -y install php curl php-cli php-mbstring unzip
 
 # https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
