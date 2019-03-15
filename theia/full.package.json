@@ -40,7 +40,6 @@
         "@theia/preview": "next",
         "@theia/process": "next",
         "@theia/python": "next",
-        "python-debug": "latest",
         "@theia/ruby": "next",
         "@theia/rust": "next",
         "@theia/search-in-workspace": "next",
