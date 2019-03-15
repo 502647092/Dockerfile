@@ -51,7 +51,7 @@
         "@theia/typescript": "next",
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
-        "@theia/workspace": "next",
+        "@theia/workspace": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
