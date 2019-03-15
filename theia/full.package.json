@@ -16,6 +16,7 @@
         "@theia/go": "next",
         "@theia/getting-started": "next",
         "@theia/java": "next",
+        "@theia/java-debug": "next",
         "@theia/json": "next",
         "@theia/yaml": "next",
         "@theia/keymaps": "next",
@@ -27,6 +28,7 @@
         "@theia/mini-browser": "next",
         "@theia/monaco": "next",
         "@theia/navigator": "next",
+        "@theia/debug-nodejs": "next",
         "@theia/outline-view": "next",
         "@theia/php": "next",
         "@theia/output": "next",
@@ -38,6 +40,7 @@
         "@theia/preview": "next",
         "@theia/process": "next",
         "@theia/python": "next",
+        "python-debug": "latest",
         "@theia/ruby": "next",
         "@theia/rust": "next",
         "@theia/search-in-workspace": "next",
@@ -49,7 +52,6 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
