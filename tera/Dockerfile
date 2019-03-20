@@ -1,8 +1,10 @@
-FROM miaowoo/node-tini:8.15.0-alpine
+FROM node:10.15.3-alpine
 LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 
+ENTRYPOINT ["/sbin/tini", "--"]
+
 RUN set -x && \
-  apk add --no-cache python tzdata && \
+  apk add --no-cache tini python tzdata && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/* && \
   echo "Asia/Shanghai" > /etc/timezone && \
