@@ -11,3 +11,6 @@ RUN set -ex && \
     curl -qsSLo /opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-5.1.47.jar https://repo.yumc.pw/repository/maven-public/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar
 
 VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
+
+# Run below command to get listen key !!!PLEASE REPLACE SERIAL NUMBER!!!
+# docker exec -it $(docker ps -a | grep confluence | awk '{print $1}') java -jar /opt/atlassian/confluence/atlassian-agent.jar -m admin@yumc.pw -n MiaoWoo -p conf -o https://cl.yumc.pw -s BIJQ-AT94-42T8-C4OY
