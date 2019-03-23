@@ -1,4 +1,4 @@
-FROM webdevops/php-nginx
+FROM webdevops/php-nginx:alpine
 LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 
 ENV KODEXPLORER_VERSION=4.39
