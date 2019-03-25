@@ -178,7 +178,16 @@ RUN mkdir -p /home/theia/java && \
   sed -i s@core.id1\',@core.id1\',\'-javaagent:/home/theia/java/lombok.jar\',@g /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
-RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
+RUN yarn --pure-lockfile && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn --production && \
+    yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
+    yarn autoclean --force && \
+    rm -rf ./node_modules/electron && \
+    yarn cache clean
 EXPOSE 3000
 ENV SHELL /bin/zsh
 
