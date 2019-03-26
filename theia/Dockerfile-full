@@ -191,4 +191,5 @@ RUN yarn --pure-lockfile && \
 EXPOSE 3000
 ENV SHELL /bin/zsh
 
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
+
