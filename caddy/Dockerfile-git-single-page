@@ -6,6 +6,6 @@ WORKDIR /root
 RUN mkdir -p /usr/local/bin
 ADD build-git-single-page-caddy-file /usr/local/bin/build-caddy-file
 ADD caddy caddy
-RUN apk add git && chmod +x /usr/local/bin/build-caddy-file
+RUN apk add git && chmod a+x /usr/local/bin/build-caddy-file && chmod a+x caddy
 
-CMD build-caddy-file > Caddyfile && ./caddy
+CMD build-caddy-file > Caddyfile && cat Caddyfile && ./caddy
