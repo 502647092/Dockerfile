@@ -2,10 +2,9 @@ FROM alpine:3.9
 LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 
 WORKDIR /root
+RUN apk add git && mkdir -p /root/www
 
-RUN mkdir -p /usr/local/bin
-ADD build-caddy-file /usr/local/bin/build-caddy-file
-ADD caddy caddy
-RUN chmod +x /usr/local/bin/build-caddy-file
+COPY entrypoint.sh caddy /usr/local/bin/
 
-CMD build-caddy-file > Caddyfile && ./caddy
+ENTRYPOINT [ "entrypoint.sh" ]
+CMD [ "caddy", "--conf", "/etc/caddy/Caddyfile", "--log", "stdout"]
