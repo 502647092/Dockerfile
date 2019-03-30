@@ -51,7 +51,7 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "@devpodio/vue": "0.4.4"
+        "@devpodio/theia-vue-extension": "0.2.1"
     },
     "devDependencies": {
         "@theia/cli": "next"
