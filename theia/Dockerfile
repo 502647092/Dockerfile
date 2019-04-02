@@ -1,7 +1,7 @@
 FROM miaowoo/theia-base
 
 WORKDIR /home/theia
-ADD full.package.json ./package.json
+ADD package.json ./package.json
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 
 # Add Lombok Support
