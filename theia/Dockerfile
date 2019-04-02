@@ -1,4 +1,4 @@
-FROM miaowoo/theia-base
+FROM miaowoo/development:ubuntu
 
 WORKDIR /home/theia
 ADD package.json ./package.json
