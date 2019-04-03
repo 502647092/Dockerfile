@@ -7,8 +7,7 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 # Add Lombok Support
 RUN mkdir -p /home/theia/java && \
   wget -qO/home/theia/java/lombok.jar https://projectlombok.org/downloads/lombok.jar && \
-  sed -i s@\'-j@\'-javaagent:/home/theia/java/lombok.jar\',\'-j@g /home/theia/node_modules/@theia/java/src/node/java-contribution.ts && \
-  sed -i s@\'-j@\'-javaagent:/home/theia/java/lombok.jar\',\'-j@g /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
+  sed -i s@\'-j@\'-javaagent:/home/theia/java/lombok.jar\', \'-j@g /home/theia/node_modules/@theia/java/src/node/java-contribution.ts
 
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
 RUN yarn --pure-lockfile && \
@@ -20,7 +19,8 @@ RUN yarn --pure-lockfile && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
     rm -rf ./node_modules/electron && \
-    yarn cache clean
+    yarn cache clean && \
+    sed -i s@\'-j@\'-javaagent:/home/theia/java/lombok.jar\', \'-j@g /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
 EXPOSE 3000
 ENV SHELL /bin/zsh
