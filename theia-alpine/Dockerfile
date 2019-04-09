@@ -5,10 +5,10 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 #Required to use go get with git source
 RUN apk add --no-cache git openssh musl-dev python zsh tmux nano yarn curl
 
-ENV GO_VERSION 1.12.1 \
+ENV GO_VERSION=1.12.1 \
     GOPATH=/home/theia/go \
     GOROOT=/usr/local/go \
-    PATH $PATH:${GOROOT}/bin:${GOPATH}/bin
+    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
 RUN set -ex && \
     curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
@@ -71,7 +71,7 @@ RUN yarn --pure-lockfile && \
     rm -rf ./node_modules/electron && \
     yarn cache clean
 
-ENV SHELL /bin/zsh \
+ENV SHELL=/bin/zsh \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 EXPOSE 3000
