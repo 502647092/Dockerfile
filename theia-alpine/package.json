@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/plugin-ext-vscode": "next",
+        "@theia/preview": "next",
+        "@theia/editor-preview": "next",
+        "@theia/getting-started": "next",
+        "@theia/json": "next",
+        "@theia/textmate-grammars": "next",
+        "@theia/git": "next",
+        "@theia/keymaps": "next",
+        "@theia/merge-conflicts": "next",
+        "@theia/task": "next",
+        "@theia/terminal": "next",
+        "@theia/workspace": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "vscode-go": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.9.2/vspackage",
+        "redhat.java": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/java/0.42.1/vspackage",
+        "octref.vetur": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/octref/vsextensions/vetur/0.18.1/vspackage",
+        "jebbs.plantuml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/jebbs/vsextensions/plantuml/2.10.9/vspackage",
+        "vscode-lombok": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GabrielBB/vsextensions/vscode-lombok/0.9.7/vspackage",
+        "vscode-docker": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/PeterJausovec/vsextensions/vscode-docker/0.6.1/vspackage"
+    }
+}
