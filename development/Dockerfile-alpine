@@ -1,0 +1,56 @@
+FROM node:10.15.3-alpine
+LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
+
+##GO
+#Required to use go get with git source
+RUN apk add --no-cache git openssh musl-dev python zsh tmux nano yarn curl
+
+ENV GO_VERSION 1.12.1 \
+    GOPATH=/home/theia/go \
+    GOROOT=/usr/local/go \
+    PATH $PATH:${GOROOT}/bin:${GOPATH}/bin
+RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
+RUN set -ex && \
+    curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
+    # install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
+    go get -u -v \
+    github.com/mdempsky/gocode \
+    github.com/uudashr/gopkgs/cmd/gopkgs \
+    github.com/ramya-rao-a/go-outline \
+    github.com/acroca/go-symbols \
+    golang.org/x/tools/cmd/guru \
+    golang.org/x/tools/cmd/gorename \
+    github.com/fatih/gomodifytags \
+    github.com/haya14busa/goplay/cmd/goplay \
+    github.com/josharian/impl \
+    github.com/tylerb/gotype-live \
+    github.com/rogpeppe/godef \
+    github.com/zmb3/gogetdoc \
+    golang.org/x/tools/cmd/goimports \
+    github.com/sqs/goreturns \
+    winterdrache.de/goformat/goformat \
+    golang.org/x/lint/golint \
+    github.com/cweill/gotests/... \
+    github.com/alecthomas/gometalinter \
+    honnef.co/go/tools/... \
+    github.com/golangci/golangci-lint/cmd/golangci-lint \
+    github.com/mgechev/revive \
+    github.com/sourcegraph/go-langserver \
+    github.com/go-delve/delve/cmd/dlv \
+    github.com/davidrjenni/reftools/cmd/fillstruct \
+    github.com/godoctor/godoctor && \
+    go get -u -v -d github.com/stamblerre/gocode && \
+    go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode && \
+    rm -rf $GOPATH/src && \
+    rm -rf $GOPATH/pkg
+
+RUN set -ex && \
+    mkdir ~/.tmux && \
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
+    wget -qO- https://blog.yumc.pw/attachment/conf/tmux.conf > ~/.tmux.conf && \
+    ~/.tmux/plugins/tpm/bin/install_plugins && \
+    git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
+    sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
