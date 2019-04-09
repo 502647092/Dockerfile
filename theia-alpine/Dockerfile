@@ -3,7 +3,7 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 ##GO
 #Required to use go get with git source
-RUN apk add --no-cache git openssh musl-dev python zsh tmux nano yarn
+RUN apk add --no-cache git openssh musl-dev python zsh tmux nano yarn curl
 
 ENV GO_VERSION 1.12.1 \
     GOPATH=/home/theia/go \
