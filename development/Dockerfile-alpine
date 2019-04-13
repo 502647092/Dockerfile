@@ -43,7 +43,7 @@ RUN set -ex && \
 
 # Install Tmux Config & On-My-ZSH
 RUN set -ex && \
-    apk add --no-cache bash && \
+    apk add --no-cache bash tzdata && \
     mkdir ~/.tmux && \
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
     wget -qO- https://blog.yumc.pw/attachment/conf/tmux.conf > ~/.tmux.conf && \
