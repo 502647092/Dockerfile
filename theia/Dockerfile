@@ -18,7 +18,6 @@ RUN yarn --pure-lockfile && \
     echo *.ts.map >> .yarnclean && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
-    rm -rf ./node_modules/electron && \
     yarn cache clean && \
     sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
