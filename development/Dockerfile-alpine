@@ -1,17 +1,14 @@
-FROM node:10.15.3-alpine
+FROM alpine:3.9
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 ##GO
 #Required to use go get with git source
-RUN apk add --no-cache git openssh musl-dev python zsh tmux nano yarn curl
+RUN apk add --no-cache git go openssh musl-dev python zsh tmux nano nodejs yarn curl
 
-ENV GO_VERSION=1.12.1 \
-    GOPATH=/home/theia/go \
-    GOROOT=/usr/local/go \
-    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
+ENV GOPATH=/home/theia/go \
+    PATH=$PATH:${GOPATH}/bin
 RUN mkdir -p /home/theia/.go && echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
 RUN set -ex && \
-    curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
     # install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
     go get -u -v \
     github.com/mdempsky/gocode \
@@ -44,6 +41,7 @@ RUN set -ex && \
     rm -rf $GOPATH/src && \
     rm -rf $GOPATH/pkg
 
+# Install Tmux Config & On-My-ZSH
 RUN set -ex && \
     mkdir ~/.tmux && \
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && \
@@ -54,3 +52,5 @@ RUN set -ex && \
     sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
+
+ENV SHELL /bin/zsh
