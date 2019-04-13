@@ -1,11 +1,9 @@
-FROM miaowoo/development:alpine
-LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
+FROM node:10-alpine
+RUN apk add --no-cache make gcc g++ python
+ARG version=latest
 WORKDIR /home/theia
 ADD package.json ./package.json
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
-
-# using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn --production && \
@@ -16,7 +14,20 @@ RUN yarn --pure-lockfile && \
     yarn autoclean --force && \
     yarn cache clean
 
-ENV THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
+FROM miaowoo/development:alpine
+LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
+WORKDIR /home/theia
+COPY --from=0 --chown=theia:theia /home/theia /home/theia
+
+RUN chmod g+rw /home && \
+    mkdir -p /home/project && \
+    chown -R theia:theia /home/theia && \
+    chown -R theia:theia /home/project && \
+    rm -rf ~/.theia && \
+    mkdir -p /home/project/.theia && \
+    ln -sf /home/project/.theia ~/.theia
+
+ENV THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 EXPOSE 3000
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
