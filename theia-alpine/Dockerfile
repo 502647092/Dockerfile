@@ -4,7 +4,12 @@ RUN apk add --no-cache make gcc g++ python
 ARG version=latest
 WORKDIR /home/theia
 ADD package.json ./package.json
-RUN yarn --pure-lockfile && \
+RUN set -ex && \
+    sed -i s@marketplace.visualstudio.com@ms-vscode.gallery.vsassets.io@g package.json && \
+    sed -i s@publishers@publisher@g package.json && \
+    sed -i s@vsextensions@extension@g package.json && \
+    sed -i s@vspackage@assetbyname/Microsoft.VisualStudio.Services.VSIXPackage@g package.json && \
+    yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn --production && \
     yarn autoclean --init && \
