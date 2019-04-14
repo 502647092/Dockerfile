@@ -1,0 +1,11 @@
+services:
+  - docker
+
+git:
+  depth: 1
+
+branches:
+  only:
+  - master
+
+language: generic

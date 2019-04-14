@@ -18,12 +18,10 @@ FROM miaowoo/development:alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /home/theia
-COPY --from=0 --chown=theia:theia /home/theia /home/theia
+COPY --from=0 /home/theia /home/theia
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
-    chown -R theia:theia /home/theia && \
-    chown -R theia:theia /home/project && \
     rm -rf ~/.theia && \
     mkdir -p /home/project/.theia && \
     ln -sf /home/project/.theia ~/.theia
