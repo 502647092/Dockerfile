@@ -15,10 +15,15 @@ RUN apk add --no-cache \
     # Python
     python py-pip \
     # PHP \
-    php php7-xml php7-zip
+    php php7-xml php7-zip php-json php-phar php-openssl php-iconv php-mbstring
 
 # Python
 RUN pip install python-language-server
+
+# PHP
+RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm composer-setup.php
 
 # Golang
 ENV GOPATH=/home/theia/go \
