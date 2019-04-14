@@ -25,9 +25,13 @@ RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
     && rm composer-setup.php
 
-# Golang
-ENV GOPATH=/home/theia/go \
-    PATH=$PATH:${GOPATH}/bin
+# Java alpine default install at /usr/lib/jvm/default-jvm
+ENV JAVA_HOME=/usr/lib/jvm/default-jvm
+
+# Golang alpine default install at /usr/lib/go
+ENV GOROOT=/usr/lib/go \
+    GOPATH=/home/theia/go \
+    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 RUN set -ex && \
     # install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
     go get -u -v \
