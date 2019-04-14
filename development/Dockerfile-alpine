@@ -5,7 +5,7 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 #Required to use go get with git source
 RUN apk add --no-cache \
     # Base Package
-    git ttf-freefont tzdata ca-certificates zsh tmux nano bash tzdata openssh \
+    git ttf-freefont tzdata ca-certificates zsh tmux nano bash tzdata openssh openssl curl \
     # Theia NodeJS
     nodejs yarn \
     # Go
