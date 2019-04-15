@@ -20,11 +20,8 @@
     "adapters": {
         "vscode-go": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.9.2/vspackage",
         "java": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/java/0.42.1/vspackage",
-        "vscode-intelephense-client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bmewburn/vsextensions/vscode-intelephense-client/1.0.13/vspackage",
         "python": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2019.3.6558/vspackage",
         "vscode-lombok": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GabrielBB/vsextensions/vscode-lombok/0.9.7/vspackage",
-        "vetur": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/octref/vsextensions/vetur/0.18.1/vspackage",
-        "shell-format": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/foxundermoon/vsextensions/shell-format/4.0.5/vspackage",
-        "remotefs": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/liximomo/vsextensions/remotefs/0.0.14/vspackage"
+        "vetur": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/octref/vsextensions/vetur/0.18.1/vspackage"
     }
 }
