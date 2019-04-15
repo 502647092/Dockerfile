@@ -1,17 +1,13 @@
 {
     "private": true,
     "dependencies": {
+        "@theia/getting-started": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
-        "@theia/getting-started": "next",
         "@theia/json": "next",
         "@theia/textmate-grammars": "next",
-        "@theia/git": "next",
-        "@theia/keymaps": "next",
-        "@theia/task": "next",
-        "@theia/terminal": "next",
-        "@theia/workspace": "next"
+        "@theia/git": "next"
     },
     "devDependencies": {
         "@theia/cli": "next",
