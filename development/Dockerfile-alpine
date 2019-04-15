@@ -18,7 +18,7 @@ RUN apk add --no-cache \
     php php7-xml php7-zip php-json php-phar php-openssl php-iconv php-mbstring
 
 # Python
-RUN pip install python-language-server
+RUN pip install python-language-server autopep8 pylint
 
 # PHP
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
