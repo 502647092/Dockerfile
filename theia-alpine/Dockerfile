@@ -1,6 +1,6 @@
 
 FROM node:10-alpine
-RUN apk add --no-cache make gcc g++ python
+RUN apk add --no-cache make gcc g++ python composer
 ARG version=latest
 WORKDIR /home/theia
 ADD package.json ./package.json
