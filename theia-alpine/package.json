@@ -5,11 +5,8 @@
         "@theia/plugin-ext-vscode": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
-        "@theia/json": "next",
         "@theia/extension-manager": "next",
         "@theia/textmate-grammars": "next",
-        "@theia/python": "next",
-        "@theia/php": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
@@ -24,6 +21,7 @@
         "vscode-go": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.9.2/vspackage",
         "java": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/java/0.42.1/vspackage",
         "vscode-lombok": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GabrielBB/vsextensions/vscode-lombok/0.9.7/vspackage",
+        "php-intellisense": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/felixfbecker/vsextensions/php-intellisense/2.3.10/vspackage",
         "vetur": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/octref/vsextensions/vetur/0.18.1/vspackage"
     }
 }

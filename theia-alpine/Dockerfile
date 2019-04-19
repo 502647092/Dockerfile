@@ -1,6 +1,6 @@
 
-FROM node:10-alpine
-RUN apk add --no-cache make gcc g++ python composer
+FROM node:10-alpine AS builder
+RUN apk add --no-cache make gcc g++ python
 ARG version=latest
 WORKDIR /home/theia
 ADD package.json ./package.json
@@ -23,7 +23,7 @@ FROM miaowoo/development:alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /home/theia
-COPY --from=0 /home/theia /home/theia
+COPY --from=builder /home/theia /home/theia
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
