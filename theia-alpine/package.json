@@ -6,7 +6,10 @@
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
         "@theia/json": "next",
+        "@theia/extension-manager": "next",
         "@theia/textmate-grammars": "next",
+        "@theia/python": "next",
+        "@theia/php": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
