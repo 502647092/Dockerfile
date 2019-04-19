@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 ##GO
@@ -15,7 +15,10 @@ RUN apk add --no-cache \
     # Python
     python py-pip \
     # PHP \
-    php php7-xml php7-zip php-json php-phar php-openssl php-iconv php-mbstring
+    php php7-xml php7-zip php7-dom \
+    php-json php-phar php7-zlib php7-curl \
+    php7-gd php7-ctype php-iconv php-openssl php-mbstring \
+    php7-fileinfo php7-simplexml php7-xmlwriter php7-xmlreader
 
 # Python
 RUN pip install python-language-server autopep8 pylint
