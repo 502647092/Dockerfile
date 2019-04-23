@@ -14,10 +14,10 @@
 - 重写配置
   - CADDY_REWRITE: 传递任意参数 开启 REWRITE 适用于单页应用
   - CADDY_NOT_REWRITE_PATH: 不进行重写的路径 默认为 `${CADDY_API_PATH}` 或者 `/api`
-- GIT自动部署配置[配置文档](https://caddyserver.com/docs/http.git)
-  - CADDY_GIT_URL: 项目GIT地址 如果需要登录 请传递登录信息 `https://user:pass@git.xxx.com/group/project.git`
+- GIT自动部署配置 [配置文档](https://caddyserver.com/docs/http.git)
+  - CADDY_GIT_URL: 项目GIT地址 如果需要登录 请传递登录信息 `https://user:pass@git.xxx.com/user/project.git`
   - CADDY_GIT_BRANCH: 需要部署的分支
   - CADDY_GIT_PATH: 拉取代码到指定目录 默认为 `${CADDY_ROOT}` 或者 `/root/www`
   - CADDY_HOOK_PATH: 配置 WEBHOOK 默认为 `/webhook` 即访问 当前站点的 `/webhook` 就重新从 GIT 更新网站源代码
-  - CADDY_HOOK_SECRET: WEBHHOOK 密钥
+  - CADDY_HOOK_SECRET: WEBHOOK 密钥
   - CADDY_HOOK_TYPE: WEBHOOK 类型 默认不用传递 或只传递 `generic` 支持 GOGS GITLAB GITHUB GITEA
