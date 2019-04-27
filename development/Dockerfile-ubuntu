@@ -86,7 +86,7 @@ RUN set -ex \
 #Developer tools
 
 ##GO
-ENV GO_VERSION 1.12.1
+ENV GO_VERSION 1.12.4
 ENV GOPATH=/home/theia/go
 ENV GOROOT=/usr/local/go
 ENV PATH $PATH:${GOROOT}/bin:${GOPATH}/bin
@@ -117,6 +117,7 @@ RUN set -ex && \
     github.com/golangci/golangci-lint/cmd/golangci-lint \
     github.com/mgechev/revive \
     github.com/sourcegraph/go-langserver \
+    golang.org/x/tools/cmd/gopls && \
     github.com/go-delve/delve/cmd/dlv \
     github.com/davidrjenni/reftools/cmd/fillstruct \
     github.com/godoctor/godoctor && \
