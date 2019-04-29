@@ -21,8 +21,11 @@ RUN set -ex && \
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
 ENV NODE_VERSION 8.14.1
+ENV YARN_VERSION 1.13.0
 
-RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+RUN set -ex \
+    && ARCH=
+    && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \
     ppc64el) ARCH='ppc64le';; \
@@ -36,10 +39,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
-
-ENV YARN_VERSION 1.13.0
-
-RUN set -ex \
+    # YARN
     && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && mkdir -p /opt/yarn \
     && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/yarn --strip-components=1 \
