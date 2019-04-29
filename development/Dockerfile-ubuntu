@@ -10,12 +10,15 @@ ENV NODE_VERSION=8.14.1 \
 
 RUN DEBIAN_FRONTEND=noninteractive \
     set -ex && \
+    apt-get update && \
+    # Base
+    apt-get -y install wget && \
     # C/C++
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && \
     # Base
-    apt-get -y install curl xz-utils wget build-essential zsh tmux nano \
+    apt-get -y install curl xz-utils build-essential zsh tmux nano \
     # Golang
     git sudo \
     # Java
