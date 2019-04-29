@@ -8,8 +8,7 @@ ENV NODE_VERSION=8.14.1 \
     GOROOT=/usr/local/go \
     PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 
-RUN DEBIAN_FRONTEND=noninteractive \
-    set -ex && \
+RUN set -ex && \
     apt-get update && \
     # Base
     apt-get -y install wget gpg && \
@@ -18,7 +17,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && \
     # Base
-    apt-get -y install curl xz-utils build-essential zsh tmux nano \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install curl xz-utils build-essential zsh tmux nano \
     # Golang
     git sudo \
     # Java
