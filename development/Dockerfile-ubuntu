@@ -1,11 +1,11 @@
 FROM ubuntu:18.04
 
 #Common deps
-ENV NODE_VERSION=8.14.1 &&
-    YARN_VERSION=1.13.0 &&
-    GO_VERSION=1.12.4 &&
-    GOPATH=/home/theia/go &&
-    GOROOT=/usr/local/go &&
+ENV NODE_VERSION=8.14.1 \
+    YARN_VERSION=1.13.0 \
+    GO_VERSION=1.12.4 \
+    GOPATH=/home/theia/go \
+    GOROOT=/usr/local/go \
     PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 
 RUN DEBIAN_FRONTEND=noninteractive \
