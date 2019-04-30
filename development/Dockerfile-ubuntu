@@ -5,8 +5,8 @@ ENV NODE_VERSION=8.14.1 \
     YARN_VERSION=1.13.0 \
     GO_VERSION=1.12.4 \
     GOPATH=/home/theia/go \
-    GOROOT=/usr/local/go \
-    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
+    GOROOT=/usr/local/go
+ENV PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 
 RUN set -ex && \
     apt-get update && \
