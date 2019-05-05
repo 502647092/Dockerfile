@@ -1,0 +1,27 @@
+FROM node:10.15.3-alpine
+LABEL maintainer="admin@yumc.pw(MiaoWoo)"
+
+RUN set -x && \
+    apk add --no-cache python tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    rm -rf /var/cache/apk/* && \
+    echo "Asia/Shanghai" > /etc/timezone
+RUN mkdir -p /app && \
+    wget -O- https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
+    cd /app/Source && \
+    yarn
+
+ADD ./entrypoint.sh ./frpc /
+
+ENV PORT=80 PASSWD=123456
+# TERA_SERVER_PRIVATE_KEY_HEX   Account Key
+# TERA_NET_WORK_MODE_IP         Network IP (FRP Server IP Same as)
+# TERA_NET_WORK_MODE_PORT       Network PORT
+# FRP_SERVER_PORT               FRP Server Port(Default 7000)
+# FRP_TOKEN                     FRP Server Token
+# TERA_COUNT_MINING_CPU         MINE CPUs(Default is 1)
+# TERA_SIZE_MINING_MEMORY       MINE Mems(Default is Cpus*1024*1024*1024*4)
+# TERA_WALLET_MINING_ACCOUNT    MINE AccountID
+EXPOSE 80
+
+ENTRYPOINT [ "/entrypoint.sh" ]
