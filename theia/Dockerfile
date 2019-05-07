@@ -1,16 +1,16 @@
 FROM miaowoo/development:ubuntu
 
 WORKDIR /home/theia
+
 ADD package.json ./package.json
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 
-# Add Lombok Support
-RUN mkdir -p /home/theia/java && \
+RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
+    # Add Lombok Support
+    mkdir -p /home/theia/java && \
     wget -qO/home/theia/java/lombok.jar https://projectlombok.org/downloads/lombok.jar && \
-    sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/src/node/java-contribution.ts
-
-# using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
-RUN yarn --pure-lockfile && \
+    sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/src/node/java-contribution.ts && \
+    # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
+    yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn --production && \
     yarn autoclean --init && \
