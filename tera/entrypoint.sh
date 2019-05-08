@@ -8,9 +8,6 @@ FRP_ROOT=${FRP_ROOT:-''}
 TERA_NET_WORK_MODE_PORT=${TERA_NET_WORK_MODE_PORT:-30000}
 
 if [[ -f "${TERA_DATA}/const.lst" ]]; then
-    if [[ -n "${TERA_SERVER_PRIVATE_KEY_HEX}" ]]; then
-        sed -i "s@\"SERVER_PRIVATE_KEY_HEX\": .*@\"SERVER_PRIVATE_KEY_HEX\": \"${TERA_SERVER_PRIVATE_KEY_HEX}\",@g" ${TERA_DATA}/const.lst
-    fi
     if [[ -n "${TERA_NET_WORK_MODE_IP}" ]]; then
         sed -i "s@\"USE_NET_FOR_SERVER_ADDRES\": .*@\"USE_NET_FOR_SERVER_ADDRES\": 1,@g" ${TERA_DATA}/const.lst
         sed -i "s@\"UseDirectIP\": .*@\"UseDirectIP\": true,@g" ${TERA_DATA}/const.lst
@@ -54,9 +51,13 @@ EOF
         TERA_SIZE_MINING_MEMORY=${TERA_SIZE_MINING_MEMORY:-$((1024*1024*1024*4*${TERA_COUNT_MINING_CPU}))}
         sed -i "s@\"SIZE_MINING_MEMORY\": .*@\"SIZE_MINING_MEMORY\": ${TERA_SIZE_MINING_MEMORY},@g" ${TERA_DATA}/const.lst
     fi
-    sed -i "s@\"WATCHDOG_BADACCOUNT\": .*@\"WATCHDOG_BADACCOUNT\": ${TERA_WATCHDOG_BADACCOUNT:-1},@g" ${TERA_DATA}/const.lst
+    # Close Watch Dog In New Version
+    sed -i "s@\"WATCHDOG_BADACCOUNT\": .*@\"WATCHDOG_BADACCOUNT\": ${TERA_WATCHDOG_BADACCOUNT:-0},@g" ${TERA_DATA}/const.lst
     # Disable Auto Update
     sed -i "s@\"USE_AUTO_UPDATE\": .*@\"USE_AUTO_UPDATE\": 0,@g" ${TERA_DATA}/const.lst
+    # Only Load Latest Block
+    sed -i "s@\"REST_START_COUNT\": .*@\"REST_START_COUNT\": 5000,@g" ${TERA_DATA}/const.lst
+    sed -i "s@\"DB_VERSION\": .*@\"DB_VERSION\": 2@g" ${TERA_DATA}/const.lst
 fi
 
 if [[ -f "${TERA_DATA}/WALLET/config.lst" ]]; then
