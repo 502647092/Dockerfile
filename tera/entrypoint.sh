@@ -64,6 +64,9 @@ function update_object_from_env(obj, prefix = '') {
         }
         var env_value = getEnv(env_key);
         if (env_value) {
+            if (typeof value === "number") {
+                env_value = Number(env_value)
+            }
             obj[key] = env_value;
             console.log('FORCE Update Config', key, "Value To", env_value);
         }
