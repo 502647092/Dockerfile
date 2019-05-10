@@ -5,12 +5,13 @@ set -e
 TERA_ROOT="/app/Source"
 TERA_DATA="/app/DATA"
 FRP_ROOT=${FRP_ROOT:-''}
-TERA_NET_WORK_MODE_PORT=${TERA_NET_WORK_MODE_PORT:-30000}
+FRP_SERVER_ADDR=${TERA_NET_WORK_MODE_IP:-${TERA_NET_WORK_MODE_ip:-''}}
+TERA_NET_WORK_MODE_PORT=${TERA_NET_WORK_MODE_PORT:-${TERA_NET_WORK_MODE_port:-30000}}
 
-if [[ -n "${TERA_NET_WORK_MODE_IP}" ]]; then
+if [[ -n "${FRP_SERVER_ADDR}" ]]; then
     cat >${FRP_ROOT}/frpc.ini<<EOF
 [common]
-server_addr = ${TERA_NET_WORK_MODE_IP}
+server_addr = ${FRP_SERVER_ADDR}
 server_port = ${FRP_SERVER_PORT:-7000}
 EOF
     if [[ -n "${FRP_TOKEN}" ]]; then
