@@ -42,12 +42,6 @@ EOF
     ${FRP_ROOT}/frpc -c ${FRP_ROOT}/frpc.ini &
 fi
 
-if [[ -f "${TERA_DATA}/WALLET/config.lst" ]]; then
-    if [[ -n "${TERA_WALLET_MINING_ACCOUNT}" ]]; then
-        sed -i "s@\"MiningAccount\": .*@\"MiningAccount\": ${TERA_WALLET_MINING_ACCOUNT}@g" ${TERA_DATA}/WALLET/config.lst
-    fi
-fi
-
 node <<EOF
 var fs = require('fs');
 var config_file_name = '${TERA_DATA}/const.lst'
@@ -80,11 +74,9 @@ var def = {
     TERA_USE_MINING: 1,
     TERA_POW_MAX_PERCENT: 100,
     TERA_COUNT_MINING_CPU: 1,
-    TERA_SIZE_MINING_MEMORY: 1024 * 1024 * 1024 * 4,
     TERA_WATCHDOG_BADACCOUNT: 0,
     TERA_USE_AUTO_UPDATE: 0,
-    TERA_REST_START_COUNT: 3000,
-    TERA_DB_VERSION: 2
+    TERA_REST_START_COUNT: 5000
 }
 var config = readConfig();
 if (!config.NET_WORK_MODE) {
@@ -95,9 +87,19 @@ if (!config.SIZE_MINING_MEMORY || !process.env.TERA_SIZE_MINING_MEMORY) {
     config.SIZE_MINING_MEMORY = config.COUNT_MINING_CPU * 1024 * 1024 * 1024 * 4;
 }
 
-fs.writeFileSync(config_file_name, JSON.stringify(config, null, 4))
+console.log(JSON.stringify(config));
+fs.writeFileSync(config_file_name, JSON.stringify(config, null, 4));
 EOF
-cat ${TERA_DATA}/const.lst
+
+TERA_NTP_SERVER=${TERA_NTP_SERVER:-ntp1.aliyun.com}
+echo "FORCE SET NTP SERVER TO ${TERA_NTP_SERVER}"
+sed -i s@pool.ntp.org@${TERA_NTP_SERVER}@g ${TERA_ROOT}/core/library.js
+
+if [[ -f "${TERA_DATA}/WALLET/config.lst" ]]; then
+    if [[ -n "${TERA_WALLET_MINING_ACCOUNT}" ]]; then
+        sed -i "s@\"MiningAccount\": .*@\"MiningAccount\": ${TERA_WALLET_MINING_ACCOUNT}@g" ${TERA_DATA}/WALLET/config.lst
+    fi
+fi
 
 cd ${TERA_ROOT}
 node set httpport:${PORT} password:${PASSWD}
