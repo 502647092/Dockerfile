@@ -41,33 +41,62 @@ EOF
     ${FRP_ROOT}/frpc -c ${FRP_ROOT}/frpc.ini &
 fi
 
-if [[ -f "${TERA_DATA}/const.lst" ]]; then
-    if [[ -n "${TERA_NET_WORK_MODE_IP}" ]]; then
-        sed -i "s@\"USE_NET_FOR_SERVER_ADDRES\": .*@\"USE_NET_FOR_SERVER_ADDRES\": 1,@g" ${TERA_DATA}/const.lst
-        sed -i "s@\"UseDirectIP\": .*@\"UseDirectIP\": true,@g" ${TERA_DATA}/const.lst
-        sed -i "s@\"ip\": .*@\"ip\": \"${TERA_NET_WORK_MODE_IP}\",@g" ${TERA_DATA}/const.lst
-        sed -i "s@\"port\": .*@\"port\": ${TERA_NET_WORK_MODE_PORT},@g" ${TERA_DATA}/const.lst
-    fi
-    TERA_COUNT_MINING_CPU=${TERA_COUNT_MINING_CPU:-1}
-    if [[ -n "${TERA_COUNT_MINING_CPU}" ]]; then
-        sed -i "s@\"COUNT_MINING_CPU\": .*@\"COUNT_MINING_CPU\": ${TERA_COUNT_MINING_CPU},@g" ${TERA_DATA}/const.lst
-        TERA_SIZE_MINING_MEMORY=${TERA_SIZE_MINING_MEMORY:-$((1024*1024*1024*4*${TERA_COUNT_MINING_CPU}))}
-        sed -i "s@\"SIZE_MINING_MEMORY\": .*@\"SIZE_MINING_MEMORY\": ${TERA_SIZE_MINING_MEMORY},@g" ${TERA_DATA}/const.lst
-    fi
-    # Close Watch Dog In New Version
-    sed -i "s@\"WATCHDOG_BADACCOUNT\": .*@\"WATCHDOG_BADACCOUNT\": ${TERA_WATCHDOG_BADACCOUNT:-0},@g" ${TERA_DATA}/const.lst
-    # Disable Auto Update
-    sed -i "s@\"USE_AUTO_UPDATE\": .*@\"USE_AUTO_UPDATE\": 0,@g" ${TERA_DATA}/const.lst
-    # Only Load Latest Block
-    sed -i "s@\"REST_START_COUNT\": .*@\"REST_START_COUNT\": ${TERA_REST_START_COUNT:-5000},@g" ${TERA_DATA}/const.lst
-    sed -i "s@\"DB_VERSION\": .*@\"DB_VERSION\": ${TERA_DB_VERSION:-2}@g" ${TERA_DATA}/const.lst
-fi
-
 if [[ -f "${TERA_DATA}/WALLET/config.lst" ]]; then
     if [[ -n "${TERA_WALLET_MINING_ACCOUNT}" ]]; then
         sed -i "s@\"MiningAccount\": .*@\"MiningAccount\": ${TERA_WALLET_MINING_ACCOUNT}@g" ${TERA_DATA}/WALLET/config.lst
     fi
 fi
+
+node <<EOF
+var fs = require('fs');
+var config_file_name = '${TERA_DATA}/const.lst'
+
+function readConfig() {
+    return JSON.parse(fs.readFileSync(config_file_name));
+}
+
+function getEnv(path) {
+    return process.env[path] || def[path] || undefined;
+}
+
+function update_object_from_env(obj, prefix = '') {
+    for (key in obj) {
+        var value = obj[key];
+        var env_key = prefix + key;
+        if (typeof value === "object") {
+            update_object_from_env(value, env_key + "_");
+            continue;
+        }
+        var env_value = getEnv(env_key);
+        if (env_value) {
+            obj[key] = env_value;
+            console.log('FORCE Update Config', key, "Value To", env_value);
+        }
+    }
+}
+
+var def = {
+    TERA_USE_MINING: 1,
+    TERA_POW_MAX_PERCENT: 100,
+    TERA_COUNT_MINING_CPU: 1,
+    TERA_SIZE_MINING_MEMORY: 1024 * 1024 * 1024 * 4,
+    TERA_WATCHDOG_BADACCOUNT: 0,
+    TERA_USE_AUTO_UPDATE: 0,
+    TERA_REST_START_COUNT: 3000,
+    TERA_DB_VERSION: 2
+}
+var config = readConfig();
+if (!config.NET_WORK_MODE) {
+    config.NET_WORK_MODE = {};
+}
+update_object_from_env(config, "TERA_");
+if (!config.SIZE_MINING_MEMORY || !process.env.TERA_SIZE_MINING_MEMORY) {
+    config.SIZE_MINING_MEMORY = config.COUNT_MINING_CPU * 1024 * 1024 * 1024 * 4;
+}
+
+fs.writeFileSync(config_file_name, JSON.stringify(config, null, 4))
+EOF
+cat ${TERA_DATA}/const.lst
 
 cd ${TERA_ROOT}
 node set httpport:${PORT} password:${PASSWD}
