@@ -57,7 +57,7 @@ function readConfig() {
 }
 
 function getEnv(path) {
-    return process.env[path] || def[path] || undefined;
+    return process.env[path] || process.env[path.toUpperCase()] || def[path] || undefined;
 }
 
 function update_object_from_env(obj, prefix = '') {
