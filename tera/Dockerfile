@@ -14,7 +14,7 @@ RUN set -x && \
   mv tera-master /app
 
 WORKDIR /app/Source
-RUN yarn
+RUN npm install
 
 ENV PORT 80
 ENV PASSWD 123456

@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER MiaoWoo<admin@yumc.pw>
+LABEL maintainer="MiaoWoo<admin@yumc.pw>"
 
 ENV LANG C.UTF-8
 

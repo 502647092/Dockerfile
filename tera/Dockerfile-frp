@@ -9,7 +9,7 @@ RUN set -x && \
     mkdir -p /app && \
     wget -O- https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
     cd /app/Source && \
-    yarn
+    npm install
 
 ADD ./entrypoint.sh ./frpc /
 
