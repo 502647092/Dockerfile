@@ -5,6 +5,7 @@ RUN set -x && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/* && \
   echo "Asia/Shanghai" > /etc/timezone && \
+  mkdir -p /app && \
   wget -O- https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
   cd /app/Source && npm install
 
