@@ -15,7 +15,7 @@ LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 ENTRYPOINT ["/sbin/tini", "--"]
 
 RUN set -x && \
-  apk add --no-cache tini tzdata & \
+  apk add --no-cache tini tzdata && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/*
 
