@@ -1,23 +1,30 @@
+FROM node:10.15.3-alpine AS builder
+
+RUN set -x && \
+  apk add --no-cache tini python tzdata make g++ && \
+  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+  rm -rf /var/cache/apk/* && \
+  echo "Asia/Shanghai" > /etc/timezone && \
+  wget -O- https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
+  cd /app/Source && npm install
+
 FROM node:10.15.3-alpine
 LABEL maintainer="admin@yumc.pw(MiaoWoo)"
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
 RUN set -x && \
-  apk add --no-cache tini python tzdata && \
+  apk add --no-cache tini tzdata & \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-  rm -rf /var/cache/apk/* && \
-  echo "Asia/Shanghai" > /etc/timezone && \
-  wget https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz && \
-  tar -xvzf tera-master.tar.gz && \
-  rm -rf tera-master.tar.gz && \
-  mv tera-master /app
+  rm -rf /var/cache/apk/*
+
+COPY --from=builder /app /app
 
 WORKDIR /app/Source
-RUN npm install
 
 ENV PORT 80
 ENV PASSWD 123456
+
 EXPOSE 80
 
 CMD node set httpport:${PORT} password:${PASSWD} && node run-node.js
