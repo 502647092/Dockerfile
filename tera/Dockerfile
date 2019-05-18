@@ -1,7 +1,7 @@
 FROM node:10.15.3-alpine AS builder
 
 RUN set -x && \
-  apk add --no-cache tini python tzdata make g++ && \
+  apk add --no-cache python tzdata make g++ && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/* && \
   echo "Asia/Shanghai" > /etc/timezone && \
