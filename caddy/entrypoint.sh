@@ -16,7 +16,7 @@ EOF
 if [[ -n "${CADDY_UI}" || -n "${CADDY_UI_URL}" ]]; then
   cat >> /etc/caddy/Caddyfile <<EOF
   proxy / ${CADDY_UI_URL:-${CADDY_UI_SCHEME:-http}://${CADDY_UI:-ui}} {
-    header_upstream Host ${CADDY_UI_HOST:-{host}}
+    header_upstream Host ${CADDY_UI_HOST:-{host\}}
     header_upstream X-Real-IP {remote}
     header_upstream X-Forwarded-For {remote}
     header_upstream X-Forwarded-Proto {scheme}
@@ -27,7 +27,7 @@ if [[ -n "${CADDY_API}" || -n "${CADDY_API_PATH}" || -n "${CADDY_API_URL}" ]]; t
   cat >> /etc/caddy/Caddyfile <<EOF
   proxy ${CADDY_API_PATH:-/api} ${CADDY_API_URL:-${CADDY_API_SCHEME:-http}://${CADDY_API:-api}} {
     without ${CADDY_API_PATH:-/api}
-    header_upstream Host ${CADDY_API_HOST:-{host}}
+    header_upstream Host ${CADDY_API_HOST:-{host\}}
     header_upstream X-Real-IP {remote}
     header_upstream X-Forwarded-For {remote}
     header_upstream X-Forwarded-Proto {scheme}
