@@ -33,11 +33,11 @@ if [[ -n "${CADDY_API}" || -n "${CADDY_API_PATH}" || -n "${CADDY_API_URL}" ]]; t
     header_upstream X-Forwarded-Proto {scheme}
   }
 EOF
-  if [[ -n "${CADDY_REWRITE}" ]]; then
+  if [[ -n "${CADDY_REWRITE}" || -n "${CADDY_REWRITE_PATH}" ]]; then
   cat >> /etc/caddy/Caddyfile <<EOF
   rewrite {
     if {path} not_starts_with ${CADDY_NOT_REWRITE_PATH:-${CADDY_API_PATH:-/api}}
-    to {path} /
+    to {path} ${CADDY_REWRITE_PATH:-/}
   }
 EOF
   fi
