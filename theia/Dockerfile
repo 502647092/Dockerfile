@@ -22,6 +22,7 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
     sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
 
 EXPOSE 3000
-ENV SHELL /bin/zsh
+ENV SHELL=/bin/zsh \
+    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
