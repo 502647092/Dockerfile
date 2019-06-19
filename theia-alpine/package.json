@@ -1,6 +1,9 @@
 {
     "private": true,
     "dependencies": {
+        "typescript": "latest",
+        "@theia/typescript": "next",
+        "@theia/tslint": "next",
         "@theia/getting-started": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/preview": "next",
@@ -17,12 +20,5 @@
         "postinstall": "download-debug-adapters"
     },
     "adapterDir": "plugins",
-    "adapters": {
-        "vscode-go": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.10.2/vspackage",
-        "java": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/java/0.44.0/vspackage",
-        "vscode-lombok": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GabrielBB/vsextensions/vscode-lombok/0.9.8/vspackage",
-        "php-intellisense": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/felixfbecker/vsextensions/php-intellisense/2.3.10/vspackage",
-        "php-cs-fixer": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/junstyle/vsextensions/php-cs-fixer/0.1.119/vspackage",
-        "vetur": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/octref/vsextensions/vetur/0.19.5/vspackage"
-    }
+    "adapters": {}
 }

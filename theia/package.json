@@ -55,5 +55,10 @@
     },
     "devDependencies": {
         "@theia/cli": "next"
-    }
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {}
 }
