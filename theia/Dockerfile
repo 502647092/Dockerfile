@@ -5,6 +5,7 @@ WORKDIR /home/theia
 ADD package.json ./package.json
 
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
+    mkdir -p /home/theia/plugins && \
     # Add Lombok Support
     mkdir -p /home/theia/java && \
     wget -qO/home/theia/java/lombok.jar https://projectlombok.org/downloads/lombok.jar && \
