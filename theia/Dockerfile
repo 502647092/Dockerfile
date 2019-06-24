@@ -6,10 +6,6 @@ ADD package.json ./package.json
 
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
     mkdir -p /home/theia/plugins && \
-    # Add Lombok Support
-    mkdir -p /home/theia/java && \
-    wget -qO/home/theia/java/lombok.jar https://projectlombok.org/downloads/lombok.jar && \
-    sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/src/node/java-contribution.ts && \
     # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
     yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
@@ -19,8 +15,7 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
     echo *.ts.map >> .yarnclean && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
-    yarn cache clean && \
-    sed -i "s@'-jar@'-javaagent:/home/theia/java/lombok.jar', '-jar@g" /home/theia/node_modules/@theia/java/lib/node/java-contribution.js
+    yarn cache clean
 
 EXPOSE 3000
 ENV SHELL=/bin/zsh \
