@@ -25,12 +25,6 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 WORKDIR /home/theia
 COPY --from=builder /home/theia /home/theia
 
-RUN chmod g+rw /home && \
-    mkdir -p /home/project && \
-    rm -rf ~/.theia && \
-    mkdir -p /home/project/.theia && \
-    ln -sf /home/project/.theia ~/.theia
-
 ENV THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 EXPOSE 3000
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
