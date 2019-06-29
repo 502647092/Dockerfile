@@ -28,6 +28,7 @@
         "@theia/outline-view": "next",
         "@theia/output": "next",
         "@theia/plugin": "next",
+        "@theia/plugin-dev": "next",
         "@theia/plugin-ext": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/preferences": "next",

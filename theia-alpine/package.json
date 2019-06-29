@@ -5,10 +5,10 @@
         "@theia/typescript": "next",
         "@theia/tslint": "next",
         "@theia/getting-started": "next",
+        "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
-        "@theia/extension-manager": "next",
         "@theia/textmate-grammars": "next",
         "@theia/git": "next"
     },
@@ -20,5 +20,7 @@
         "postinstall": "download-debug-adapters"
     },
     "adapterDir": "plugins",
-    "adapters": {}
+    "adapters": {
+        "humao_rest_client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.21.3/vspackage"
+    }
 }
