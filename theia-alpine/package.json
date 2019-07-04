@@ -21,6 +21,7 @@
     },
     "adapterDir": "plugins",
     "adapters": {
-        "humao_rest_client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.21.3/vspackage"
+        "humao_rest_client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.21.3/vspackage",
+        "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.13.0/vspackage"
     }
 }
