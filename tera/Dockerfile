@@ -19,7 +19,7 @@ RUN set -x && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
   rm -rf /var/cache/apk/*
 
-COPY --from=builder /app /app
+COPY --from=builder /app/Source /app/Source
 
 WORKDIR /app/Source
 

@@ -20,7 +20,7 @@ RUN set -x && \
 
 ADD ./entrypoint.sh ./frpc /
 
-COPY --from=builder /app /app
+COPY --from=builder /app/Source /app/Source
 
 ENV PORT=80 PASSWD=123456
 # TERA_NET_WORK_MODE_IP         Network IP (FRP Server IP Same as)
