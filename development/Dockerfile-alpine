@@ -1,13 +1,22 @@
 FROM alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
+# Java alpine default install at /usr/lib/jvm/default-jvm
+ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
+    # Golang alpine default install at /usr/lib/go
+    GOROOT=/usr/lib/go \
+    GOPATH=/home/theia/go \
+    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin \
+    SHELL /bin/zsh
+
 ##GO
 #Required to use go get with git source
 RUN apk add --no-cache \
     # Base Package
-    git ttf-freefont tzdata ca-certificates zsh tmux nano bash tzdata openssh openssl curl \
+    git ttf-freefont tzdata ca-certificates \
+    zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
     # Theia NodeJS
-    nodejs yarn \
+    nodejs yarn npm \
     # Go
     go musl-dev \
     # Java
@@ -28,13 +37,6 @@ RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && rm composer-setup.php
 
-# Java alpine default install at /usr/lib/jvm/default-jvm
-ENV JAVA_HOME=/usr/lib/jvm/default-jvm
-
-# Golang alpine default install at /usr/lib/go
-ENV GOROOT=/usr/lib/go \
-    GOPATH=/home/theia/go \
-    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
 RUN set -ex && \
     # install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
     go get -u -v \
@@ -80,5 +82,3 @@ RUN set -ex && \
     sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"ys\"@g ~/.zshrc && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
-
-ENV SHELL /bin/zsh
