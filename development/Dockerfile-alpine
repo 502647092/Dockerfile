@@ -7,7 +7,7 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     GOROOT=/usr/lib/go \
     GOPATH=/home/theia/go \
     PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin \
-    SHELL /bin/zsh
+    SHELL=/bin/zsh
 
 ##GO
 #Required to use go get with git source
