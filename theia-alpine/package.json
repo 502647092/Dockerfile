@@ -4,6 +4,7 @@
         "typescript": "latest",
         "@theia/typescript": "next",
         "@theia/tslint": "next",
+        "@theia/debug-nodejs": "next",
         "@theia/getting-started": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
