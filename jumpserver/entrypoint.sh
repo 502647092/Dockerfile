@@ -1,4 +1,3 @@
-
 #!/bin/bash
 #
 
@@ -40,9 +39,9 @@ if [ ! -f "/opt/coco/config.yml" ]; then
 fi
 
 source /opt/py3/bin/activate
-cd /opt/jumpserver && ./jms start all -d
-/etc/init.d/guacd start
-sh /config/tomcat8/bin/startup.sh
+cd /opt/jumpserver && ./jms start -d
 cd /opt/coco && ./cocod start -d
+/etc/init.d/guacd start
+sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
 tail -f /opt/readme.txt
