@@ -4,7 +4,7 @@ WORKDIR /opt
 
 ENV GUAC_VER=1.0.0 \
     LUNA_VER=1.5.2 \
-    TOMCAT_VER=9.0.22
+    TOMCAT_VER=9.0.24
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -28,7 +28,7 @@ RUN set -ex \
     && yum -y install nginx \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions \
-    && wget https://www-us.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
+    && wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
     && tar xf apache-tomcat-${TOMCAT_VER}.tar.gz -C /config \
     && rm -rf apache-tomcat-${TOMCAT_VER}.tar.gz \
     && mv /config/apache-tomcat-${TOMCAT_VER} /config/tomcat9 \
