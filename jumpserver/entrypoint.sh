@@ -42,12 +42,19 @@ if [ ! -f "/opt/coco/config.yml" ]; then
 fi
 
 source /opt/py3/bin/activate
-cd /opt/jumpserver && ./jms start &
-sleep 30
-cd /opt/coco && ./cocod start &
-sleep 30
-/etc/init.d/guacd start
+echo "Wait Server Starting..."
+cd /opt/jumpserver
+echo "Starting celery..."
+./jms start celery &
 sleep 10
+echo "Starting beat..."
+./jms start beat &
+sleep 20
+echo "Starting gunicorn..."
+./jms start gunicorn &
+sleep 30
+cd /opt/coco && ./cocod start -d
+/etc/init.d/guacd start
 sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
 tail -f /opt/readme.txt
