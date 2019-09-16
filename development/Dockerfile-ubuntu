@@ -21,7 +21,7 @@ RUN set -ex && \
     # Java
     maven gradle openjdk-8-jdk \
     # C/C++
-    clang-tools-10 clangd-10 clang-tidy-10 && \
+    clang-tools-10 clangd-10 clang-tidy-10 \
     # Python
     python python-pip \
     # PHP
