@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 
 #Common deps
-ENV NODE_VERSION=10.16.0 \
-    YARN_VERSION=1.16.0 \
-    GO_VERSION=1.12.6 \
+ENV NODE_VERSION=10.16.3 \
+    YARN_VERSION=1.17.3 \
+    GO_VERSION=1.13 \
     GOPATH=/home/theia/go \
     GOROOT=/usr/local/go
 ENV PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin
@@ -17,13 +17,11 @@ RUN set -ex && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && \
     # Base
-    DEBIAN_FRONTEND=noninteractive apt-get -y install curl xz-utils build-essential zsh tmux nano \
-    # Golang
-    git sudo \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install curl xz-utils build-essential zsh tmux nano git sudo \
     # Java
     maven gradle openjdk-8-jdk \
     # C/C++
-    clang-tools-9 \
+    clang-tools-10 clangd-10 clang-tidy-10 && \
     # Python
     python python-pip \
     # PHP
@@ -97,7 +95,8 @@ RUN set -ex && \
 
 RUN set -ex && \
     #C/C++
-    ln -s /usr/bin/clangd-9 /usr/bin/clangd && \
+    ln -s /usr/bin/clangd-10 /usr/bin/clangd && \
+    ln -s /usr/bin/clang-tidy-10 /usr/bin/clang-tidy && \
     # Python
     pip install python-language-server && \
     # PHP
