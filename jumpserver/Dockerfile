@@ -1,24 +1,20 @@
-FROM centos:7
+FROM centos:7.6.1810
 LABEL maintainer "wojiushixiaobai"
 WORKDIR /opt
 
 ENV GUAC_VER=1.0.0 \
     LUNA_VER=1.5.3 \
-    TOMCAT_VER=9.0.24
+    TOMCAT_VER=9.0.26
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && yum -y install kde-l10n-Chinese \
-    && yum -y reinstall glibc-common \
-    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 \
-    && export LC_ALL=zh_CN.UTF-8 \
-    && echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf \
-    && yum -y install wget gcc epel-release git yum-utils \
-    && yum -y install python36 python36-devel \
     && yum -y localinstall --nogpgcheck https://mirrors.aliyun.com/rpmfusion/free/el/rpmfusion-free-release-7.noarch.rpm https://mirrors.aliyun.com/rpmfusion/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
     && rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro \
     && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm \
-    && yum install -y java-1.8.0-openjdk libtool \
+    && yum -y install kde-l10n-Chinese \
+    && yum -y reinstall glibc-common \
+    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 && export LC_ALL=zh_CN.UTF-8 && echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf \
+    && yum -y install wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
     && mkdir /usr/local/lib/freerdp/ \
     && ln -s /usr/local/lib/freerdp /usr/lib64/freerdp \
     && yum install -y cairo-devel libjpeg-turbo-devel libpng-devel uuid-devel \
