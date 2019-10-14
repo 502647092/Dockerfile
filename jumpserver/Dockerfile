@@ -39,18 +39,15 @@ RUN set -ex \
 
 RUN set -ex \
     && git clone --depth=1 https://github.com/jumpserver/jumpserver.git \
-    && git clone --depth=1 https://github.com/jumpserver/coco.git \
     && git clone --depth=1 https://github.com/jumpserver/docker-guacamole.git \
     && wget https://github.com/jumpserver/luna/releases/download/${LUNA_VER}/luna.tar.gz \
     && tar xf luna.tar.gz \
     && chown -R root:root luna \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
-    && yum -y install $(cat /opt/coco/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
     && source /opt/py3/bin/activate \
     && pip install --upgrade pip setuptools \
     && pip install -r /opt/jumpserver/requirements/requirements.txt \
-    && pip install -r /opt/coco/requirements/requirements.txt \
     && cd docker-guacamole \
     && tar xf guacamole-server-${GUAC_VER}.tar.gz \
     && cd guacamole-server-${GUAC_VER} \
@@ -102,5 +99,5 @@ ENV JUMPSERVER_KEY_DIR=/config/guacamole/keys \
     JUMPSERVER_ENABLE_DRIVE=true \
     JUMPSERVER_SERVER=http://127.0.0.1:8080
 
-EXPOSE 80 2222
+EXPOSE 80
 ENTRYPOINT ["entrypoint.sh"]
