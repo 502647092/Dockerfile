@@ -41,8 +41,11 @@ RUN set -ex \
     && git clone --depth=1 https://github.com/jumpserver/jumpserver.git \
     && git clone --depth=1 https://github.com/jumpserver/docker-guacamole.git \
     && wget https://github.com/jumpserver/luna/releases/download/${LUNA_VER}/luna.tar.gz \
+    && wget https://github.com/jumpserver/koko/releases/download/${LUNA_VER}/koko-master-linux-amd64.tar.gz \
     && tar xf luna.tar.gz \
     && chown -R root:root luna \
+    && mkdir -p /opt/koko \
+    && tar -xf koko-master-linux-amd64.tar.gz --strip-components=1 -C /opt/koko \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
     && source /opt/py3/bin/activate \
@@ -70,7 +73,7 @@ RUN set -ex \
     && yum clean all \
     && rm -rf /var/cache/yum/* \
     && rm -rf /opt/luna.tar.gz \
-    && rm -rf /var/cache/yum/* \
+    && rm -rf /opt/koko-master-linux-amd64.tar.gz \
     && rm -rf ~/.cache/pip \
     && rm -rf /opt/linux-amd64.tar.gz
 
