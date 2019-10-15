@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 
 localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 export LANG=zh_CN.UTF-8
@@ -34,12 +33,12 @@ fi
 
 if [ ! -f "/opt/koko/config.yml" ]; then
     cp /opt/koko/config_example.yml /opt/koko/config.yml
-    sed -i "s/BOOTSTRAP_TOKEN: <PleasgeChangeSameWithJumpserver>/BOOTSTRAP_TOKEN: $BOOTSTRAP_TOKEN/g" /opt/coco/config.yml
-    sed -i "s/# BIND_HOST: 0.0.0.0/BIND_HOST: 127.0.0.1/g" /opt/coco/config.yml
-    sed -i "s/# SSHD_PORT: 2222/SSHD_PORT: 2223/g" /opt/coco/config.yml
-    sed -i "s/# LOG_LEVEL: INFO/LOG_LEVEL: ERROR/g" /opt/coco/config.yml
-    sed -i "s@# SFTP_ROOT: /tmp@SFTP_ROOT: /@g" /opt/coco/config.yml
-    echo "ENABLE_PROXY_PROTOCOL: true" >> /opt/coco/config.yml
+    sed -i "s/BOOTSTRAP_TOKEN: <PleasgeChangeSameWithJumpserver>/BOOTSTRAP_TOKEN: $BOOTSTRAP_TOKEN/g" /opt/koko/config.yml
+    sed -i "s/# BIND_HOST: 0.0.0.0/BIND_HOST: 127.0.0.1/g" /opt/koko/config.yml
+    sed -i "s/# SSHD_PORT: 2222/SSHD_PORT: 2223/g" /opt/koko/config.yml
+    sed -i "s/# LOG_LEVEL: INFO/LOG_LEVEL: ERROR/g" /opt/koko/config.yml
+    sed -i "s@# SFTP_ROOT: /tmp@SFTP_ROOT: /@g" /opt/koko/config.yml
+    echo "ENABLE_PROXY_PROTOCOL: true" >> /opt/koko/config.yml
 fi
 
 if [ -f "/etc/nginx/nginx.conf" ]; then
@@ -57,7 +56,6 @@ echo "Starting beat..."
 sleep 20
 echo "Starting gunicorn..."
 ./jms start gunicorn &
-sleep 30
 while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "302" ]
 do
     echo "wait for gunicorn ready"
