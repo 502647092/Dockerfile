@@ -1,4 +1,0 @@
-"vscode-maven": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-maven/0.16.1/vspackage",
-"vscode-java-dependency": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-dependency/0.4.0/vspackage",
-"ms-python": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2019.3.6558/vspackage",
-"plantuml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/jebbs/vsextensions/plantuml/2.10.9/vspackage",
