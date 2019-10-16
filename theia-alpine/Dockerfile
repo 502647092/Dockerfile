@@ -24,9 +24,7 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /home/theia
 COPY --from=builder /home/theia /home/theia
-COPY entrypoint.sh /bin/entrypoint.sh
-RUN chmod +x /bin/entrypoint.sh
 
 ENV THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 EXPOSE 3000
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
