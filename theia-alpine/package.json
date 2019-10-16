@@ -3,14 +3,10 @@
     "dependencies": {
         "typescript": "latest",
         "@theia/typescript": "next",
-        "@theia/tslint": "next",
         "@theia/debug-nodejs": "next",
         "@theia/getting-started": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/preview": "next",
-        "@theia/editor-preview": "next",
-        "@theia/textmate-grammars": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
@@ -22,8 +18,12 @@
     },
     "adapterDir": "plugins",
     "adapters": {
-        "humao.rest-client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.22.0/vspackage",
-        "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.13.0/vspackage",
-        "redhat.vscode-yaml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.5.3/vspackage"
+        "humao.rest-client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.22.2/vspackage",
+        "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.14.2/vspackage",
+        "redhat.vscode-yaml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.5.3/vspackage",
+        "ms-vscode.vscode-typescript-tslint-plugin":"https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/vscode-typescript-tslint-plugin/1.2.2/vspackage"
+    },
+    "resolutions": {
+        "vscode-json-languageserver": "1.2.1"
     }
 }
