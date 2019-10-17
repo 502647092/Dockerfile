@@ -4,8 +4,8 @@
         "typescript": "latest",
         "@theia/typescript": "next",
         "@theia/debug-nodejs": "next",
-        "@theia/getting-started": "next",
         "@theia/plugin-dev": "next",
+        "@theia/editor-preview": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/textmate-grammars": "next",
         "@theia/git": "next"
