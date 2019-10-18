@@ -1,0 +1,16 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/plugin-ext-vscode": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.14.2/vspackage",
+        "redhat.vscode-yaml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.5.3/vspackage"
+    }
+}
