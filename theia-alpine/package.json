@@ -5,6 +5,7 @@
         "@theia/typescript": "next",
         "@theia/debug-nodejs": "next",
         "@theia/plugin-dev": "next",
+        "@theia/preview": "next",
         "@theia/editor-preview": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/textmate-grammars": "next",
