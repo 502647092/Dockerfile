@@ -1,9 +1,9 @@
-FROM centos:7.6.1810
+FROM centos:7
 LABEL maintainer "wojiushixiaobai"
 WORKDIR /opt
 
-ENV GUAC_VER=1.0.0 \
-    LUNA_VER=1.5.3 \
+ENV VERSION=1.5.4 \
+    GUAC_VER=1.0.0 \
     TOMCAT_VER=9.0.27
 
 RUN set -ex \
@@ -11,14 +11,13 @@ RUN set -ex \
     && yum -y localinstall --nogpgcheck https://mirrors.aliyun.com/rpmfusion/free/el/rpmfusion-free-release-7.noarch.rpm https://mirrors.aliyun.com/rpmfusion/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
     && rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro \
     && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm \
-    && yum -y install kde-l10n-Chinese \
-    && yum -y reinstall glibc-common \
+    && yum -y install kde-l10n-Chinese glibc-common \
     && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 && export LC_ALL=zh_CN.UTF-8 && echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf \
     && yum -y install wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
     && mkdir /usr/local/lib/freerdp/ \
     && ln -s /usr/local/lib/freerdp /usr/lib64/freerdp \
     && yum install -y cairo-devel libjpeg-turbo-devel libpng-devel uuid-devel \
-    && yum install -y ffmpeg-devel freerdp-devel freerdp-plugins pango-devel libssh2-devel libtelnet-devel libvncserver-devel pulseaudio-libs-devel openssl-devel libvorbis-devel libwebp-devel ghostscript \
+    && yum install -y ffmpeg-devel freerdp1.2-devel libvncserver-devel pulseaudio-libs-devel openssl-devel libvorbis-devel libwebp-devel \
     && echo -e "[nginx-stable]\nname=nginx stable repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=1\nenabled=1\ngpgkey=https://nginx.org/keys/nginx_signing.key" > /etc/yum.repos.d/nginx.repo \
     && rpm --import https://nginx.org/keys/nginx_signing.key \
     && yum -y install nginx \
@@ -40,12 +39,13 @@ RUN set -ex \
 RUN set -ex \
     && git clone --depth=1 https://github.com/jumpserver/jumpserver.git \
     && git clone --depth=1 https://github.com/jumpserver/docker-guacamole.git \
-    && wget https://github.com/jumpserver/luna/releases/download/${LUNA_VER}/luna.tar.gz \
-    && wget https://github.com/jumpserver/koko/releases/download/${LUNA_VER}/koko-master-linux-amd64.tar.gz \
+    && wget https://github.com/jumpserver/koko/releases/download/${VERSION}/koko-master-linux-amd64.tar.gz \
+    && tar xf koko-master-linux-amd64.tar.gz \
+    && mv kokodir koko \
+    && chown -R root:root koko \
+    && wget https://github.com/jumpserver/luna/releases/download/${VERSION}/luna.tar.gz \
     && tar xf luna.tar.gz \
     && chown -R root:root luna \
-    && mkdir -p /opt/koko \
-    && tar -xf koko-master-linux-amd64.tar.gz --strip-components=1 -C /opt/koko \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
     && source /opt/py3/bin/activate \
@@ -68,14 +68,11 @@ RUN set -ex \
     && wget https://github.com/ibuler/ssh-forward/releases/download/v0.0.5/linux-amd64.tar.gz \
     && tar xf linux-amd64.tar.gz -C /bin/ \
     && chmod +x /bin/ssh-forward \
-    && wget -O /etc/nginx/nginx.conf https://demo.jumpserver.org/download/nginx/nginx.conf \
     && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/jumpserver.conf \
     && yum clean all \
     && rm -rf /var/cache/yum/* \
-    && rm -rf /opt/luna.tar.gz \
-    && rm -rf /opt/koko-master-linux-amd64.tar.gz \
-    && rm -rf ~/.cache/pip \
-    && rm -rf /opt/linux-amd64.tar.gz
+    && rm -rf /opt/*.tar.gz \
+    && rm -rf ~/.cache/pip
 
 COPY readme.txt readme.txt
 COPY entrypoint.sh /bin/entrypoint.sh

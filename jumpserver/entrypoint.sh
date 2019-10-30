@@ -34,15 +34,9 @@ fi
 if [ ! -f "/opt/koko/config.yml" ]; then
     cp /opt/koko/config_example.yml /opt/koko/config.yml
     sed -i "s/BOOTSTRAP_TOKEN: <PleasgeChangeSameWithJumpserver>/BOOTSTRAP_TOKEN: $BOOTSTRAP_TOKEN/g" /opt/koko/config.yml
-    sed -i "s/# BIND_HOST: 0.0.0.0/BIND_HOST: 127.0.0.1/g" /opt/koko/config.yml
-    sed -i "s/# SSHD_PORT: 2222/SSHD_PORT: 2223/g" /opt/koko/config.yml
     sed -i "s/# LOG_LEVEL: INFO/LOG_LEVEL: ERROR/g" /opt/koko/config.yml
     sed -i "s@# SFTP_ROOT: /tmp@SFTP_ROOT: /@g" /opt/koko/config.yml
     echo "ENABLE_PROXY_PROTOCOL: true" >> /opt/koko/config.yml
-fi
-
-if [ -f "/etc/nginx/nginx.conf" ]; then
-    sed -i "s/proxy_pass cocossh/proxy_pass kokossh/g" /etc/nginx/nginx.conf
 fi
 
 source /opt/py3/bin/activate
