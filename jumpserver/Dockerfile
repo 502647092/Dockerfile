@@ -23,7 +23,7 @@ RUN set -ex \
     && yum -y install nginx \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions \
-    && wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
+    && wget https://www-eu.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
     && tar xf apache-tomcat-${TOMCAT_VER}.tar.gz -C /config \
     && rm -rf apache-tomcat-${TOMCAT_VER}.tar.gz \
     && mv /config/apache-tomcat-${TOMCAT_VER} /config/tomcat9 \
