@@ -2,6 +2,7 @@
     "private": true,
     "dependencies": {
         "typescript": "latest",
+        "keytar": "latest",
         "@theia/typescript": "next",
         "@theia/debug-nodejs": "next",
         "@theia/plugin-dev": "next",

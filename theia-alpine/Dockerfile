@@ -1,6 +1,6 @@
 
 FROM node:10-alpine AS builder
-RUN apk add --no-cache make gcc g++ python
+RUN apk add --no-cache make gcc g++ python python-dev libsecret libsecret-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD package.json ./package.json

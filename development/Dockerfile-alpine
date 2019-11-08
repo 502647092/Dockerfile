@@ -16,7 +16,7 @@ RUN apk add --no-cache \
     git ttf-freefont tzdata ca-certificates \
     zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
     # Build tools
-    make g++ libx11-dev libxkbfile-dev \
+    make g++ libx11-dev libxkbfile-dev libsecret libsecret-dev \
     # Theia NodeJS
     nodejs yarn npm \
     # Go
@@ -40,7 +40,7 @@ RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && rm composer-setup.php
 
 RUN set -ex && \
-    # install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
+    # install VS Code Go tools: https://github.com/microsoft/vscode-go/blob/e0cb5d3a2a/src/goTools.ts#L132-L289
     go get -u -v \
     github.com/mdempsky/gocode \
     github.com/uudashr/gopkgs/cmd/gopkgs \
@@ -59,12 +59,11 @@ RUN set -ex && \
     winterdrache.de/goformat/goformat \
     golang.org/x/lint/golint \
     github.com/cweill/gotests/... \
-    github.com/alecthomas/gometalinter \
     honnef.co/go/tools/... \
     github.com/golangci/golangci-lint/cmd/golangci-lint \
     github.com/mgechev/revive \
     github.com/sourcegraph/go-langserver \
-    golang.org/x/tools/cmd/gopls \
+    golang.org/x/tools/gopls \
     github.com/go-delve/delve/cmd/dlv \
     github.com/davidrjenni/reftools/cmd/fillstruct \
     github.com/godoctor/godoctor && \
