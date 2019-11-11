@@ -3,14 +3,12 @@
     "dependencies": {
         "typescript": "latest",
         "keytar": "latest",
-        "@theia/typescript": "next",
         "@theia/debug-nodejs": "next",
         "@theia/plugin-dev": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/textmate-grammars": "next",
-        "@theia/git": "next"
+        "@theia/textmate-grammars": "next"
     },
     "devDependencies": {
         "@theia/cli": "next",
@@ -24,6 +22,8 @@
         "humao.rest-client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.22.2/vspackage",
         "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.14.2/vspackage",
         "redhat.vscode-yaml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.5.3/vspackage",
+        "vscode-builtin-git": "https://registry.npmjs.org/@theia/vscode-builtin-git/-/vscode-builtin-git-0.2.1.tgz",
+        "ms-vscode.vscode-typescript-next": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/vscode-typescript-next/3.8.20191105/vspackage",
         "ms-vscode.vscode-typescript-tslint-plugin": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/vscode-typescript-tslint-plugin/1.2.2/vspackage"
     },
     "resolutions": {
