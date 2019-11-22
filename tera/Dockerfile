@@ -6,7 +6,7 @@ RUN set -x && \
   rm -rf /var/cache/apk/* && \
   echo "Asia/Shanghai" > /etc/timezone && \
   mkdir -p /app && \
-  wget -O- https://gitlab.com/terafoundation/tera/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
+  wget -O- https://gitlab.com/terafoundation/tera2/-/archive/master/tera-master.tar.gz | tar -xzC /app --strip-components=1 && \
   cd /app/Source && npm install
 
 FROM node:10.15.3-alpine
