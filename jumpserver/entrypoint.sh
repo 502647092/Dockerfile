@@ -40,27 +40,29 @@ if [ ! -f "/opt/koko/config.yml" ]; then
 fi
 
 source /opt/py3/bin/activate
-echo "Wait Server Starting..."
 cd /opt/jumpserver
-if [[ -n "STEP_START" ]]; then
+if [[ -n "${STEP_START}" ]]; then
+    echo "Wait Service Step Starting..."
     JUMPSERVER_TASK='ws flower task celery beat gunicorn'
     for SRV in ${JUMPSERVER_TASK}; do
-        echo "Starting ${SRV}..."
+        echo "Starting ${SRV} Service..."
         ./jms start ${SRV} &
         sleep 5
     done
 else
     ./jms start all &
 fi
-echo "wait for jumpserver ready..."
+echo "Wait for jumpserver ready..."
 while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "302" ]; do
     sleep 2
 done
-echo "jumpserver is ready at 8080."
-echo "starting koko & timcat & nginx ..."
+echo "Jumpserver is ready at 8080."
+echo "Starting koko & timcat & nginx ..."
 cd /opt/koko && ./koko &
 /etc/init.d/guacd start
 sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
-echo "Jumpserver ALL ${VERSION} start finish. RUN docker exec -it jms_all /bin/bash"
+sleep 3
+echo "Jumpserver ALL ${VERSION} start finish."
+echo "RUN 'docker exec -it $(hostname) sh' ENTER Container."
 tail -f -
