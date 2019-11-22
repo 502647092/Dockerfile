@@ -1,5 +1,5 @@
 FROM centos:7
-LABEL maintainer "wojiushixiaobai"
+LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
 ENV VERSION=1.5.4 \
@@ -74,7 +74,6 @@ RUN set -ex \
     && rm -rf /opt/*.tar.gz \
     && rm -rf ~/.cache/pip
 
-COPY readme.txt readme.txt
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod +x /bin/entrypoint.sh
 

@@ -42,21 +42,25 @@ fi
 source /opt/py3/bin/activate
 echo "Wait Server Starting..."
 cd /opt/jumpserver
-echo "Starting celery..."
-./jms start celery &
-sleep 10
-echo "Starting beat..."
-./jms start beat &
-sleep 20
-echo "Starting gunicorn..."
-./jms start gunicorn &
-while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "302" ]
-do
-    echo "wait for gunicorn ready"
+if [[ -n "STEP_START" ]]; then
+    JUMPSERVER_TASK='ws flower task celery beat gunicorn'
+    for SRV in ${JUMPSERVER_TASK}; do
+        echo "Starting ${SRV}..."
+        ./jms start ${SRV} &
+        sleep 5
+    done
+else
+    ./jms start all &
+fi
+echo "wait for jumpserver ready..."
+while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "302" ]; do
     sleep 2
 done
+echo "jumpserver is ready at 8080."
+echo "starting koko & timcat & nginx ..."
 cd /opt/koko && ./koko &
 /etc/init.d/guacd start
 sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
-tail -f /opt/readme.txt
+echo "Jumpserver ALL ${VERSION} start finish. RUN docker exec -it jms_all /bin/bash"
+tail -f -
