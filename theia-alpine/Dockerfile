@@ -1,6 +1,6 @@
 
 FROM node:10-alpine AS builder
-RUN apk add --no-cache make gcc g++ python python-dev libsecret libsecret-dev
+RUN apk add --no-cache make gcc g++ python python-dev libsecret libsecret-dev curl
 ARG version=latest
 WORKDIR /home
 ADD . .
