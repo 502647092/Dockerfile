@@ -24,7 +24,7 @@ RUN apk add --no-cache \
     # Java
     openjdk8 maven gradle \
     # Python
-    python py-pip \
+    python python-dev py-pip \
     # PHP \
     php php7-xml php7-zip php7-dom \
     php-json php-phar php7-zlib php7-curl \
