@@ -2,8 +2,12 @@
 FROM node:10-alpine AS builder
 RUN apk add --no-cache make gcc g++ python python-dev libsecret libsecret-dev
 ARG version=latest
+WORKDIR /home
+ADD . .
+RUN set -ex && \
+    node build.js
 WORKDIR /home/theia
-ADD package.json ./package.json
+RUN cp /home/package.json ./
 RUN set -ex && \
     sed -i s@marketplace.visualstudio.com@ms-vscode.gallery.vsassets.io@g package.json && \
     sed -i s@publishers@publisher@g package.json && \

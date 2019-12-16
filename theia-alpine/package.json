@@ -21,10 +21,10 @@
     },
     "adapterDir": "plugins",
     "adapters": {
-        "humao.rest-client": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/humao/vsextensions/rest-client/0.22.2/vspackage",
-        "EditorConfig.EditorConfig": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/EditorConfig/vsextensions/EditorConfig/0.14.2/vspackage",
-        "redhat.vscode-yaml": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.5.3/vspackage",
-        "ms-vscode.vscode-typescript-next": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/vscode-typescript-next/3.8.20191105/vspackage",
-        "ms-vscode.vscode-typescript-tslint-plugin": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/vscode-typescript-tslint-plugin/1.2.2/vspackage"
+        "humao.rest-client": "https://marketplace.visualstudio.como/_apis/public/gallery/publisher/humao/extension/rest-client/0.23.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "EditorConfig.EditorConfig": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/EditorConfig/extension/EditorConfig/0.14.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "redhat.vscode-yaml": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/redhat/extension/vscode-yaml/0.6.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "ms-vscode.vscode-typescript-next": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-next/3.8.20191214/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "ms-vscode.vscode-typescript-tslint-plugin": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-tslint-plugin/1.2.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     }
 }
