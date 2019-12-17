@@ -2,9 +2,10 @@ var fs = require('fs')
 var process = require('child_process');
 
 var package = JSON.parse(fs.readFileSync('package.json').toString())
-for (adapter in package.adapters) {
+for (adapter of package.plugins) {
     if (adapter.startsWith('@theia/vscode-builtin')) {
-        package.adapters[adapter] = process.execSync(`npm info ${adapter}@next dist.tarball`).toString().replace('\n', '')
+        delete package.adapters[adapter]
+        package.adapters[adapter.split('/')[1]] = process.execSync(`npm info ${adapter}@next dist.tarball`).toString().replace('\n', '')
     } else {
         var args = adapter.split('.')
         var publisher = args[0]
