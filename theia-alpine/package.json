@@ -5,9 +5,9 @@
         "keytar": "latest",
         "@theia/typescript": "next",
         "@theia/debug-nodejs": "next",
-        "@theia/plugin-dev": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
+        "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/textmate-grammars": "next",
         "@theia/git": "next"
@@ -21,10 +21,11 @@
     },
     "adapterDir": "plugins",
     "adapters": {
-        "humao.rest-client": "https://marketplace.visualstudio.como/_apis/public/gallery/publisher/humao/extension/rest-client/0.23.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "humao.rest-client": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/humao/extension/rest-client/0.23.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
         "EditorConfig.EditorConfig": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/EditorConfig/extension/EditorConfig/0.14.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
         "redhat.vscode-yaml": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/redhat/extension/vscode-yaml/0.6.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
-        "ms-vscode.vscode-typescript-next": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-next/3.8.20191214/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
-        "ms-vscode.vscode-typescript-tslint-plugin": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-tslint-plugin/1.2.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+        "ms-vscode.vscode-typescript-next": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-next/3.8.20191216/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "ms-vscode.vscode-typescript-tslint-plugin": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-tslint-plugin/1.2.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "@theia/vscode-builtin-json": "https://repo.yumc.pw/repository/npm/@theia/vscode-builtin-json/-/vscode-builtin-json-0.3.0-next.231c6e7762.tgz"
     }
 }
