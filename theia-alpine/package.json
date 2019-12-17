@@ -10,7 +10,8 @@
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/textmate-grammars": "next",
-        "@theia/git": "next"
+        "@theia/git": "next",
+        "@theia/json": "next"
     },
     "devDependencies": {
         "@theia/cli": "next",
@@ -25,15 +26,13 @@
         "EditorConfig.EditorConfig",
         "redhat.vscode-yaml",
         "ms-vscode.vscode-typescript-next",
-        "ms-vscode.vscode-typescript-tslint-plugin",
-        "@theia/vscode-builtin-json"
+        "ms-vscode.vscode-typescript-tslint-plugin"
     ],
     "adapters": {
         "humao.rest-client": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/humao/extension/rest-client/0.23.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
         "EditorConfig.EditorConfig": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/EditorConfig/extension/EditorConfig/0.14.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
         "redhat.vscode-yaml": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/redhat/extension/vscode-yaml/0.6.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
         "ms-vscode.vscode-typescript-next": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-next/3.8.20191216/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
-        "ms-vscode.vscode-typescript-tslint-plugin": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-tslint-plugin/1.2.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
-        "vscode-builtin-json": "https://registry.npmjs.org/@theia/vscode-builtin-json/-/vscode-builtin-json-0.3.0-next.231c6e7762.tgz"
+        "ms-vscode.vscode-typescript-tslint-plugin": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/vscode-typescript-tslint-plugin/1.2.3/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     }
 }
