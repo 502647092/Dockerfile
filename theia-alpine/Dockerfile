@@ -23,7 +23,7 @@ RUN set -ex && \
     yarn autoclean --force && \
     yarn cache clean
 
-FROM miaowoo/development:alpine
+FROM miaowoo/development:node-alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /home/theia
