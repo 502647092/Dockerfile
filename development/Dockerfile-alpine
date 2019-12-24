@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
