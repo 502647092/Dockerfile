@@ -63,7 +63,6 @@
         "@theia/vscode-builtin-markdown",
         "@theia/vscode-builtin-markdown-language-features",
         "@theia/vscode-builtin-npm",
-        "@theia/vscode-builtin-node-debug",
 		"@theia/vscode-builtin-objective-c",
         "@theia/vscode-builtin-perl",
         "@theia/vscode-builtin-powershell",
