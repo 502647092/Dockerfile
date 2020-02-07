@@ -27,11 +27,11 @@
     },
     "adapterDir": "plugins",
     "plugins": [
-		"humao.rest-client",
+        "humao.rest-client",
         "EditorConfig.EditorConfig",
         "redhat.vscode-yaml",
         "ms-vscode.vscode-typescript-next",
-		"ms-vscode.vscode-typescript-tslint-plugin",
+        "ms-vscode.vscode-typescript-tslint-plugin",
         "dbaeumer.vscode-eslint",
         "@theia/vscode-builtin-bat",
         "@theia/vscode-builtin-clojure",
@@ -61,9 +61,8 @@
         "@theia/vscode-builtin-lua",
         "@theia/vscode-builtin-make",
         "@theia/vscode-builtin-markdown",
-        "@theia/vscode-builtin-markdown-language-features",
         "@theia/vscode-builtin-npm",
-		"@theia/vscode-builtin-objective-c",
+        "@theia/vscode-builtin-objective-c",
         "@theia/vscode-builtin-perl",
         "@theia/vscode-builtin-powershell",
         "@theia/vscode-builtin-pug",
@@ -81,16 +80,14 @@
         "@theia/vscode-builtin-theme-defaults",
         "@theia/vscode-builtin-theme-kimbie-dark",
         "@theia/vscode-builtin-theme-monokai",
-		"@theia/vscode-builtin-theme-quietlight",
+        "@theia/vscode-builtin-theme-quietlight",
         "@theia/vscode-builtin-theme-red",
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
-        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
-		"@theia/vscode-builtin-xml",
+        "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
     ],
-    "adapters": {
-    }
+    "adapters": {}
 }
