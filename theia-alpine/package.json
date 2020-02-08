@@ -9,7 +9,6 @@
         "@theia/editor-preview": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/textmate-grammars": "next",
         "@theia/json": "next",
         "@theia/git": "next"
     },
@@ -32,6 +31,8 @@
         "redhat.vscode-yaml",
         "ms-vscode.vscode-typescript-next",
         "ms-vscode.vscode-typescript-tslint-plugin",
+        "ms-vscode.node-debug",
+        "ms-vscode.node-debug2",
         "dbaeumer.vscode-eslint",
         "@theia/vscode-builtin-bat",
         "@theia/vscode-builtin-clojure",
