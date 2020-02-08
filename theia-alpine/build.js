@@ -10,7 +10,9 @@ for (adapter of package.plugins) {
         var args = adapter.split('.')
         var publisher = args[0]
         var asset = args[1]
-        var varsion = process.execSync(`./build.sh ${adapter}`).toString().replace('\n', '')
+        process.execSync(`./build.sh ${adapter}`)
+        var pluginPackage = JSON.parse(fs.readFileSync('extension.info').toString())
+        var varsion = pluginPackage.results[0].extensions[0].versions[0].version
         package.adapters[adapter] = `https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/${publisher}/extension/${asset}/${varsion}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage`
     }
 }
