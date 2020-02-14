@@ -28,7 +28,11 @@
     "plugins": [
         "humao.rest-client",
         "EditorConfig.EditorConfig",
+        "redhat.java",
+        "redhat.vscode-xml",
         "redhat.vscode-yaml",
+        "felixfbecker.php-intellisense",
+        "ms-vscode.Go",
         "ms-vscode.vscode-typescript-next",
         "ms-vscode.vscode-typescript-tslint-plugin",
         "ms-vscode.node-debug",
@@ -65,6 +69,7 @@
         "@theia/vscode-builtin-npm",
         "@theia/vscode-builtin-objective-c",
         "@theia/vscode-builtin-perl",
+        "@theia/vscode-builtin-php",
         "@theia/vscode-builtin-powershell",
         "@theia/vscode-builtin-pug",
         "@theia/vscode-builtin-python",
@@ -86,6 +91,7 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
+        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
