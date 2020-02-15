@@ -10,6 +10,7 @@
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/json": "next",
+        "@theia/php": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
@@ -33,8 +34,6 @@
         "redhat.vscode-yaml",
         "felixfbecker.php-intellisense",
         "ms-vscode.Go",
-        "ms-vscode.vscode-typescript-next",
-        "ms-vscode.vscode-typescript-tslint-plugin",
         "ms-vscode.node-debug",
         "ms-vscode.node-debug2",
         "dbaeumer.vscode-eslint",
@@ -91,7 +90,6 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
-        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
