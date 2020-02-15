@@ -10,7 +10,6 @@
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/json": "next",
-        "@theia/php": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
