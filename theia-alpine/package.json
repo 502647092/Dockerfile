@@ -92,10 +92,11 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
-        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
     ],
-    "adapters": {}
+    "adapters": {
+        "vscode-builtin-typescript-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/typescript-language-features-1.39.1-prel.vsix"
+    }
 }
