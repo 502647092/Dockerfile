@@ -3,8 +3,7 @@
     "dependencies": {
         "typescript": "latest",
         "keytar": "latest",
-        "@theia/typescript": "next",
-        "@theia/debug-nodejs": "next",
+        "@theia/getting-started": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
         "@theia/plugin-dev": "next",
@@ -29,6 +28,10 @@
         "humao.rest-client",
         "EditorConfig.EditorConfig",
         "redhat.java",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-dependency",
+        "GabrielBB.vscode-lombok",
         "redhat.vscode-xml",
         "redhat.vscode-yaml",
         "felixfbecker.php-intellisense",
@@ -89,6 +92,7 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
+        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
