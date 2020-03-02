@@ -67,7 +67,6 @@
         "@theia/vscode-builtin-lua",
         "@theia/vscode-builtin-make",
         "@theia/vscode-builtin-markdown",
-        "@theia/vscode-builtin-npm",
         "@theia/vscode-builtin-objective-c",
         "@theia/vscode-builtin-perl",
         "@theia/vscode-builtin-php",
@@ -97,6 +96,7 @@
         "@theia/vscode-builtin-yaml"
     ],
     "adapters": {
-        "vscode-builtin-typescript-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/typescript-language-features-1.39.1-prel.vsix"
+        "vscode-builtin-typescript-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/typescript-language-features-1.39.1-prel.vsix",
+        "vscode-builtin-npm": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/npm-1.39.1-prel.vsix"
     }
 }
