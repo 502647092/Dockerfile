@@ -50,6 +50,7 @@ async function main() {
     var package = JSON.parse(fs.readFileSync('package.json').toString())
     for (adapter of package.plugins) {
         console.log(`Get ${adapter} download url...`)
+        if (adapter.startsWith('#')) { continue; }
         if (adapter.startsWith('@theia/vscode-builtin')) {
             delete package.adapters[adapter]
             package.adapters[adapter.split('/')[1]] = process.execSync(`npm info ${adapter}@next dist.tarball`).toString().replace('\n', '')
