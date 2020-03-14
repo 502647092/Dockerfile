@@ -2,17 +2,13 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=1.5.5 \
+ENV VERSION=1.5.6 \
     GUAC_VER=1.0.0 \
-    TOMCAT_VER=9.0.29
+    TOMCAT_VER=9.0.31
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && yum -y localinstall --nogpgcheck https://mirrors.aliyun.com/rpmfusion/free/el/rpmfusion-free-release-7.noarch.rpm https://mirrors.aliyun.com/rpmfusion/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
-    && rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro \
-    && rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm \
-    && yum -y install kde-l10n-Chinese glibc-common \
-    && localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8 && export LC_ALL=zh_CN.UTF-8 && echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf \
     && yum -y install wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
     && mkdir /usr/local/lib/freerdp/ \
     && ln -s /usr/local/lib/freerdp /usr/lib64/freerdp \
@@ -22,7 +18,8 @@ RUN set -ex \
     && rpm --import https://nginx.org/keys/nginx_signing.key \
     && yum -y install nginx \
     && rm -rf /etc/nginx/conf.d/default.conf \
-    && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions \
+    && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions /config/guacamole/record /config/guacamole/drive \
+    && chown daemon:daemon /config/guacamole/record /config/guacamole/drive \
     && wget https://www-eu.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
     && tar xf apache-tomcat-${TOMCAT_VER}.tar.gz -C /config \
     && rm -rf apache-tomcat-${TOMCAT_VER}.tar.gz \
@@ -81,23 +78,19 @@ RUN chmod +x /bin/entrypoint.sh
 VOLUME /opt/jumpserver/data/media
 
 ENV SECRET_KEY=kWQdmdCQKjaWlHYpPhkNQDkfaRulM6YnHctsHLlSPs8287o2kW \
-    BOOTSTRAP_TOKEN=KXOeyNgDeTdpeu9q
-
-ENV DB_ENGINE=mysql \
+    BOOTSTRAP_TOKEN=KXOeyNgDeTdpeu9q \
+    DB_ENGINE=mysql \
     DB_HOST=127.0.0.1 \
     DB_PORT=3306 \
     DB_USER=jumpserver \
     DB_PASSWORD=weakPassword \
-    DB_NAME=jumpserver
-
-ENV REDIS_HOST=127.0.0.1 \
+    DB_NAME=jumpserver \
+    REDIS_HOST=127.0.0.1 \
     REDIS_PORT=6379 \
-    REDIS_PASSWORD=
-
-ENV JUMPSERVER_KEY_DIR=/config/guacamole/keys \
+    REDIS_PASSWORD= \
+    JUMPSERVER_KEY_DIR=/config/guacamole/keys \
     GUACAMOLE_HOME=/config/guacamole \
     GUACAMOLE_LOG_LEVEL=ERROR \
-    JUMPSERVER_CLEAR_DRIVE_SESSION=true \
     JUMPSERVER_ENABLE_DRIVE=true \
     JUMPSERVER_SERVER=http://127.0.0.1:8080
 
