@@ -1,14 +1,12 @@
 {
     "private": true,
     "dependencies": {
-        "typescript": "latest",
         "keytar": "latest",
         "@theia/getting-started": "next",
         "@theia/preview": "next",
         "@theia/editor-preview": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/json": "next",
         "@theia/git": "next"
     },
     "devDependencies": {
@@ -98,6 +96,9 @@
         "@theia/vscode-builtin-yaml"
     ],
     "adapters": {
+        "vscode-builtin-html-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/html-language-features-1.39.1-prel.vsix",
+        "vscode-builtin-markdown-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/markdown-language-features-1.39.1-prel.vsix",
+        "vscode-builtin-json-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/json-language-features-1.39.1-prel.vsix",
         "vscode-builtin-typescript-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/typescript-language-features-1.39.1-prel.vsix",
         "vscode-builtin-npm": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/npm-1.39.1-prel.vsix"
     }
