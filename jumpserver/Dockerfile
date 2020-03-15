@@ -47,7 +47,7 @@ RUN set -ex \
     && python3.6 -m venv /opt/py3 \
     && source /opt/py3/bin/activate \
     && pip install wheel \
-    && pip install --upgrade pip setuptools \
+    && pip install --upgrade pip setuptools==45.3.0 \
     && pip install -r /opt/jumpserver/requirements/requirements.txt \
     && cd docker-guacamole \
     && tar xf guacamole-server-${GUAC_VER}.tar.gz \
