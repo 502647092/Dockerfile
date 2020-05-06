@@ -30,8 +30,8 @@ RUN apk add --no-cache \
     php7-gd php7-ctype php-iconv php-openssl php-mbstring \
     php7-fileinfo php7-simplexml php7-xmlwriter php7-xmlreader php7-tokenizer && \
     curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/lib -xzf - && \
-    ls /usr/lib && \
-    go version
+    ls ${GOROOT}/go && \
+    ${GOROOT}/go version
 
 # Python
 RUN pip install python-language-server autopep8 pylint
