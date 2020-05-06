@@ -4,6 +4,7 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 # Java alpine default install at /usr/lib/jvm/default-jvm
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     # Golang alpine default install at /usr/lib/go
+    GO_VERSION=1.14 \
     GOROOT=/usr/lib/go \
     GOPATH=/home/theia/go \
     PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin \
@@ -18,7 +19,7 @@ RUN apk add --no-cache \
     # Build tools
     make g++ libx11-dev libxkbfile-dev libsecret libsecret-dev \
     # Go
-    go musl-dev \
+    musl-dev \
     # Java
     openjdk8 maven gradle \
     # Python
@@ -27,7 +28,8 @@ RUN apk add --no-cache \
     php php7-xml php7-zip php7-dom \
     php-json php-phar php7-zlib php7-curl \
     php7-gd php7-ctype php-iconv php-openssl php-mbstring \
-    php7-fileinfo php7-simplexml php7-xmlwriter php7-xmlreader php7-tokenizer
+    php7-fileinfo php7-simplexml php7-xmlwriter php7-xmlreader php7-tokenizer && \
+    curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/lib -xzf -
 
 # Python
 RUN pip install python-language-server autopep8 pylint
