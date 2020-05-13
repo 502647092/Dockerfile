@@ -32,6 +32,7 @@
         "ms-vscode.Go",
         "ms-vscode.node-debug",
         "ms-vscode.node-debug2",
+        "ms-vscode.references-view",
         "dbaeumer.vscode-eslint",
         "@theia/vscode-builtin-bat",
         "@theia/vscode-builtin-clojure",
@@ -61,6 +62,7 @@
         "@theia/vscode-builtin-lua",
         "@theia/vscode-builtin-make",
         "@theia/vscode-builtin-markdown",
+        "@theia/vscode-builtin-merge-conflict",
         "#@theia/vscode-builtin-npm",
         "@theia/vscode-builtin-objective-c",
         "@theia/vscode-builtin-perl",
@@ -86,13 +88,13 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
-        "#@theia/vscode-builtin-typescript-language-features",
+        "@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
     ],
     "adapters": {
-        "vscode-builtin-typescript-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/typescript-language-features-1.39.1-prel.vsix",
-        "vscode-builtin-npm": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/npm-1.39.1-prel.vsix"
+        "vscode-builtin-markdown-language-features": "https://open-vsx.org/api/vscode/markdown-language-features/1.39.1/file/vscode.markdown-language-features-1.39.1.vsix",
+        "vscode-builtin-npm": "https://open-vsx.org/api/vscode/npm/1.39.1/file/vscode.npm-1.39.1.vsix"
     }
 }
