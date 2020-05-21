@@ -7,8 +7,7 @@
         "@theia/editor-preview": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/json": "next",
-        "@theia/git": "next"
+        "@theia/json": "next"
     },
     "devDependencies": {
         "@theia/cli": "next",
@@ -45,6 +44,8 @@
         "@theia/vscode-builtin-docker",
         "@theia/vscode-builtin-emmet",
         "@theia/vscode-builtin-fsharp",
+        "@theia/vscode-builtin-git",
+        "@theia/vscode-builtin-git-ui",
         "@theia/vscode-builtin-go",
         "@theia/vscode-builtin-groovy",
         "@theia/vscode-builtin-grunt",
@@ -57,6 +58,7 @@
         "@theia/vscode-builtin-java",
         "@theia/vscode-builtin-javascript",
         "@theia/vscode-builtin-json",
+        "#@theia/vscode-builtin-json-language-features",
         "@theia/vscode-builtin-less",
         "@theia/vscode-builtin-log",
         "@theia/vscode-builtin-lua",
