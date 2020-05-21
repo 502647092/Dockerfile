@@ -88,12 +88,13 @@
         "@theia/vscode-builtin-theme-solarized-dark",
         "@theia/vscode-builtin-theme-tomorrow-night-blue",
         "@theia/vscode-builtin-typescript",
-        "@theia/vscode-builtin-typescript-language-features",
+        "#@theia/vscode-builtin-typescript-language-features",
         "@theia/vscode-builtin-vb",
         "@theia/vscode-builtin-xml",
         "@theia/vscode-builtin-yaml"
     ],
     "adapters": {
+        "vscode-builtin-typescript-language-features": "https://open-vsx.org/api/vscode/typescript-language-features/1.44.2/file/vscode.typescript-language-features-1.44.2.vsix",
         "vscode-builtin-markdown-language-features": "https://open-vsx.org/api/vscode/markdown-language-features/1.39.1/file/vscode.markdown-language-features-1.39.1.vsix",
         "vscode-builtin-npm": "https://open-vsx.org/api/vscode/npm/1.39.1/file/vscode.npm-1.39.1.vsix"
     }

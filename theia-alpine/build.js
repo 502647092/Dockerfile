@@ -3,7 +3,7 @@ var process = require('child_process');
 var https = require('https')
 
 function post(name) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var req = https.request({
             host: 'marketplace.visualstudio.com',
             path: '/_apis/public/gallery/extensionquery',
@@ -13,15 +13,15 @@ function post(name) {
                 'content-type': 'application/json',
                 'accept': 'application/json;api-version=6.0-preview.1;excludeUrls=true'
             }
-        }, function(res) {
+        }, function (res) {
             var data = '';
-            res.on('data', function(chunk) {
+            res.on('data', function (chunk) {
                 data += chunk;
             });
-            res.on('end', function() {
+            res.on('end', function () {
                 resolve(data);
             })
-            res.on('error', function(err) {
+            res.on('error', function (err) {
                 reject(err);
             });
         })
@@ -50,9 +50,8 @@ async function main() {
     var package = JSON.parse(fs.readFileSync('package.json').toString())
     for (adapter of package.plugins) {
         console.log(`Get ${adapter} download url...`)
-        if (adapter.startsWith('#')) { continue; }
+        if (adapter.startsWith('#') || package.adapters[adapter]) { continue; }
         if (adapter.startsWith('@theia/vscode-builtin')) {
-            delete package.adapters[adapter]
             package.adapters[adapter.split('/')[1]] = process.execSync(`npm info ${adapter}@next dist.tarball`).toString().replace('\n', '')
         } else {
             var args = adapter.split('.')
