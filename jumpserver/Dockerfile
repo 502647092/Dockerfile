@@ -2,9 +2,9 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=1.5.8 \
+ENV VERSION=1.5.9 \
     GUAC_VER=1.0.0 \
-    TOMCAT_VER=9.0.34
+    TOMCAT_VER=9.0.35
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
