@@ -16,7 +16,6 @@ RUN set -ex && \
     yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn --production && \
-    sed -i s@stat.isDirectory()@stat.isDirectory@g /home/theia/node_modules/@theia/git/lib/node/git-locator/git-locator-impl.js
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \
     echo *.ts.map >> .yarnclean && \
