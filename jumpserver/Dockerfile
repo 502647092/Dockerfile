@@ -2,9 +2,10 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=1.5.9 \
+ENV VERSION=2.0.0 \
     GUAC_VER=1.0.0 \
-    TOMCAT_VER=9.0.35
+    TOMCAT_VER=9.0.36 \
+    LANG=en_US.utf8
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -34,14 +35,18 @@ RUN set -ex \
     && rm -rf /var/cache/yum/*
 
 RUN set -ex \
-    && git clone --depth=1 https://github.com/jumpserver/jumpserver.git \
-    && git clone --depth=1 https://github.com/jumpserver/docker-guacamole.git \
+    && wget -O jumpserver.tar.gz https://github.com/jumpserver/jumpserver/archive/${VERSION}.tar.gz \
+    && tar -xf jumpserver.tar.gz \
+    && mv jumpserver-${VERSION} jumpserver \
+    && wget -O guacamole.tar.gz https://github.com/jumpserver/docker-guacamole/archive/${VERSION}.tar.gz \
+    && tar -xf guacamole.tar.gz \
+    && mv docker-guacamole-${VERSION} guacamole \
     && wget https://github.com/jumpserver/koko/releases/download/${VERSION}/koko-master-linux-amd64.tar.gz \
-    && tar xf koko-master-linux-amd64.tar.gz \
+    && tar -xf koko-master-linux-amd64.tar.gz \
     && mv kokodir koko \
     && chown -R root:root koko \
     && wget https://github.com/jumpserver/luna/releases/download/${VERSION}/luna.tar.gz \
-    && tar xf luna.tar.gz \
+    && tar -xf luna.tar.gz \
     && chown -R root:root luna \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
@@ -50,7 +55,7 @@ RUN set -ex \
     && pip install wheel \
     && pip install --upgrade pip setuptools \
     && pip install -r /opt/jumpserver/requirements/requirements.txt \
-    && cd docker-guacamole \
+    && cd guacamole \
     && tar xf guacamole-server-${GUAC_VER}.tar.gz \
     && cd guacamole-server-${GUAC_VER} \
     && autoreconf -fi \
@@ -58,15 +63,15 @@ RUN set -ex \
     && make \
     && make install \
     && cd .. \
-    && ln -sf /opt/docker-guacamole/guacamole-${GUAC_VER}.war /config/tomcat9/webapps/ROOT.war \
-    && ln -sf /opt/docker-guacamole/guacamole-auth-jumpserver-${GUAC_VER}.jar /config/guacamole/extensions/guacamole-auth-jumpserver-${GUAC_VER}.jar \
-    && ln -sf /opt/docker-guacamole/root/app/guacamole/guacamole.properties /config/guacamole/guacamole.properties \
+    && ln -sf /opt/guacamole/guacamole-${GUAC_VER}.war /config/tomcat9/webapps/ROOT.war \
+    && ln -sf /opt/guacamole/guacamole-auth-jumpserver-${GUAC_VER}.jar /config/guacamole/extensions/guacamole-auth-jumpserver-${GUAC_VER}.jar \
+    && ln -sf /opt/guacamole/root/app/guacamole/guacamole.properties /config/guacamole/guacamole.properties \
     && rm -rf guacamole-server-${GUAC_VER} \
     && tar xf ssh-forward.tar.gz -C /bin/ \
     && chmod +x /bin/ssh-forward \
     && ldconfig \
     && cd /opt \
-    && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/jumpserver.conf \
+    && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/${VERSION}/jumpserver.conf \
     && yum clean all \
     && rm -rf /var/cache/yum/* \
     && rm -rf /opt/*.tar.gz \
