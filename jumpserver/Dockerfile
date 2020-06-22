@@ -4,7 +4,6 @@ WORKDIR /opt
 
 ENV VERSION=2.0.0 \
     GUAC_VER=1.0.0 \
-    TOMCAT_VER=9.0.36 \
     LANG=en_US.utf8
 
 RUN set -ex \
@@ -21,6 +20,7 @@ RUN set -ex \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions /config/guacamole/record /config/guacamole/drive \
     && chown daemon:daemon /config/guacamole/record /config/guacamole/drive \
+    && TOMCAT_VER=`curl -s http://tomcat.apache.org/tomcat-9.0-doc/ | grep 'Version ' | awk '{print $2}' | sed 's/.$//'` \
     && wget https://www-eu.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VER}/bin/apache-tomcat-${TOMCAT_VER}.tar.gz \
     && tar xf apache-tomcat-${TOMCAT_VER}.tar.gz -C /config \
     && rm -rf apache-tomcat-${TOMCAT_VER}.tar.gz \
@@ -44,10 +44,11 @@ RUN set -ex \
     && wget https://github.com/jumpserver/koko/releases/download/${VERSION}/koko-master-linux-amd64.tar.gz \
     && tar -xf koko-master-linux-amd64.tar.gz \
     && mv kokodir koko \
-    && chown -R root:root koko \
+    && wget https://github.com/jumpserver/lina/releases/download/${VERSION}/lina.tar.gz \
+    && tar -xf lina.tar.gz \
     && wget https://github.com/jumpserver/luna/releases/download/${VERSION}/luna.tar.gz \
     && tar -xf luna.tar.gz \
-    && chown -R root:root luna \
+    && chown -R root:root koko lina luna  \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
     && echo -e "[easy_install]\nindex_url = https://mirrors.aliyun.com/pypi/simple/" > ~/.pydistutils.cfg \

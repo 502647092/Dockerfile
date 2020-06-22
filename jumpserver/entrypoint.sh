@@ -63,7 +63,7 @@ while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "30
     sleep 2
 done
 echo "Jumpserver is ready at 8080."
-echo "Starting koko & timcat & nginx ..."
+echo "Starting koko & tomcat9 & nginx ..."
 cd /opt/koko && ./koko &
 /etc/init.d/guacd start
 sh /config/tomcat9/bin/startup.sh
