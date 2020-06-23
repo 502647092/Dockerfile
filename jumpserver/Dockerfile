@@ -2,7 +2,7 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=2.0.0 \
+ENV VERSION=2.0.1 \
     GUAC_VER=1.0.0 \
     LANG=en_US.utf8
 
