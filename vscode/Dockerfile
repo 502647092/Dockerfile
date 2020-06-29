@@ -1,6 +1,6 @@
 FROM miaowoo/development:alpine
 
-RUN npm install -g code-server
+RUN npm install --unsafe-perm -g code-server
 
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod +x /bin/entrypoint.sh
