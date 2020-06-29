@@ -1,6 +1,6 @@
 FROM miaowoo/development:alpine
 
-RUN yarn global add code-server
+RUN npm install -g code-server
 
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod +x /bin/entrypoint.sh
