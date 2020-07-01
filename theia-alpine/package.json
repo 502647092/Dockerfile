@@ -7,7 +7,8 @@
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/json": "next",
-        "@theia/git": "next"
+        "@theia/git": "next",
+        "@theia/vsx-registry": "next"
     },
     "devDependencies": {
         "@theia/cli": "next",
