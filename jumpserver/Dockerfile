@@ -34,7 +34,7 @@ RUN set -ex \
     && rm -rf /var/cache/yum/*
 
 RUN set -ex \
-    mkdir -p jumpserver koko guacamole lina luna \
+    && mkdir -p jumpserver koko guacamole lina luna \
     && wget -O- https://github.com/jumpserver/jumpserver/releases/download/v${VERSION}/jumpserver-v${VERSION}.tar.gz | tar -xzC jumpserver --strip-components=1 \
     && wget -O- https://github.com/jumpserver/koko/releases/download/v${VERSION}/koko-v${VERSION}-linux-amd64.tar.gz | tar -xzC koko --strip-components=1 \
     && wget -O- https://github.com/jumpserver/docker-guacamole/archive/v${VERSION}.tar.gz | tar -xzC guacamole --strip-components=1 \
