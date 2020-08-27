@@ -40,7 +40,7 @@ RUN set -ex \
     && mkdir -p jumpserver koko guacamole lina luna kubectl-aliases \
     && wget -O- https://github.com/jumpserver/jumpserver/releases/download/v${VERSION}/jumpserver-v${VERSION}.tar.gz | tar -xzC jumpserver --strip-components=1 \
     && wget -O- https://github.com/jumpserver/koko/releases/download/v${VERSION}/koko-v${VERSION}-linux-amd64.tar.gz | tar -xzC koko --strip-components=1 \
-    && wget -O- https://github.com/jumpserver/docker-guacamole/archive/v${VERSION}.tar.gz | tar -xzC guacamole --strip-components=1 \
+    && wget -O- https://github.com/jumpserver/docker-guacamole/archive/master.tar.gz | tar -xzC guacamole --strip-components=1 \
     && wget -O- https://github.com/jumpserver/lina/releases/download/v${VERSION}/lina-v${VERSION}.tar.gz | tar -xzC lina --strip-components=1 \
     && wget -O- https://github.com/jumpserver/luna/releases/download/v${VERSION}/luna-v${VERSION}.tar.gz | tar -xzC luna --strip-components=1 \
     && wget -O- http://download.jumpserver.org/public/kubectl_aliases.tar.gz | tar -xzC kubectl-aliases --strip-components=1 \
