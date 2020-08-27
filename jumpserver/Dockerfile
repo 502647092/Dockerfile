@@ -2,11 +2,14 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=2.1.0 \
+ENV VERSION=2.2.1 \
     LANG=en_US.utf8
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "LANG=en_US.utf8" > /etc/locale.conf \
+    && echo "net.core.somaxconn = 1024" >> /etc/sysctl.conf \
+    && echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf \
     && yum -y localinstall --nogpgcheck https://mirrors.aliyun.com/rpmfusion/free/el/rpmfusion-free-release-7.noarch.rpm https://mirrors.aliyun.com/rpmfusion/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
     && yum -y install wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
     && mkdir /usr/local/lib/freerdp/ \
@@ -34,13 +37,19 @@ RUN set -ex \
     && rm -rf /var/cache/yum/*
 
 RUN set -ex \
-    && mkdir -p jumpserver koko guacamole lina luna \
+    && mkdir -p jumpserver koko guacamole lina luna kubectl-aliases \
     && wget -O- https://github.com/jumpserver/jumpserver/releases/download/v${VERSION}/jumpserver-v${VERSION}.tar.gz | tar -xzC jumpserver --strip-components=1 \
     && wget -O- https://github.com/jumpserver/koko/releases/download/v${VERSION}/koko-v${VERSION}-linux-amd64.tar.gz | tar -xzC koko --strip-components=1 \
     && wget -O- https://github.com/jumpserver/docker-guacamole/archive/v${VERSION}.tar.gz | tar -xzC guacamole --strip-components=1 \
     && wget -O- https://github.com/jumpserver/lina/releases/download/v${VERSION}/lina-v${VERSION}.tar.gz | tar -xzC lina --strip-components=1 \
     && wget -O- https://github.com/jumpserver/luna/releases/download/v${VERSION}/luna-v${VERSION}.tar.gz | tar -xzC luna --strip-components=1 \
-    && chown -R root:root koko lina luna  \
+    && wget -O- http://download.jumpserver.org/public/kubectl_aliases.tar.gz | tar -xzC kubectl-aliases --strip-components=1 \
+    && chown -R root:root koko lina luna kubectl-aliases \
+    && mv /opt/koko/kubectl /usr/local/bin/ \
+    && wget https://download.jumpserver.org/public/kubectl.tar.gz \
+    && tar -xf kubectl.tar.gz \
+    && chmod 755 kubectl && mv kubectl /usr/local/bin/rawkubectl \
+    && chmod 755 /opt/koko/init-kubectl.sh \
     && yum -y install $(cat /opt/jumpserver/requirements/rpm_requirements.txt) \
     && python3.6 -m venv /opt/py3 \
     && echo -e "[easy_install]\nindex_url = https://mirrors.aliyun.com/pypi/simple/" > ~/.pydistutils.cfg \
@@ -61,7 +70,7 @@ RUN set -ex \
     && ln -sf /opt/guacamole/root/app/guacamole/guacamole.properties /config/guacamole/guacamole.properties \
     && rm -rf guacamole-server-1.2.0 \
     && tar xf ssh-forward.tar.gz -C /bin/ \
-    && chmod +x /bin/ssh-forward \
+    && chmod 755 /bin/ssh-forward \
     && ldconfig \
     && cd /opt \
     && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/${VERSION}/jumpserver.conf \
