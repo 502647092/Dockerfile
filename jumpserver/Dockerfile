@@ -11,7 +11,7 @@ RUN set -ex \
     && echo "net.core.somaxconn = 1024" >> /etc/sysctl.conf \
     && echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf \
     && yum -y localinstall --nogpgcheck https://mirrors.aliyun.com/rpmfusion/free/el/rpmfusion-free-release-7.noarch.rpm https://mirrors.aliyun.com/rpmfusion/nonfree/el/rpmfusion-nonfree-release-7.noarch.rpm \
-    && yum -y install wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
+    && yum -y install bash-completion wget gcc epel-release git yum-utils python36 python36-devel java-1.8.0-openjdk libtool \
     && mkdir /usr/local/lib/freerdp/ \
     && ln -s /usr/local/lib/freerdp /usr/lib64/freerdp \
     && yum install -y cairo-devel libjpeg-turbo-devel libpng-devel uuid-devel \
@@ -20,6 +20,7 @@ RUN set -ex \
     && rpm --import https://nginx.org/keys/nginx_signing.key \
     && yum -y install nginx \
     && rm -rf /etc/nginx/conf.d/default.conf \
+    && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/${VERSION}/jumpserver.conf \
     && mkdir -p /config/guacamole /config/guacamole/lib /config/guacamole/extensions /config/guacamole/record /config/guacamole/drive \
     && chown daemon:daemon /config/guacamole/record /config/guacamole/drive \
     && TOMCAT_VER=`curl -s http://tomcat.apache.org/tomcat-9.0-doc/ | grep 'Version ' | awk '{print $2}' | sed 's/.$//'` \
@@ -33,6 +34,19 @@ RUN set -ex \
     && sed -i 's/level = INFO/level = OFF/g' /config/tomcat9/conf/logging.properties \
     && sed -i 's@CATALINA_OUT="$CATALINA_BASE"/logs/catalina.out@CATALINA_OUT=/dev/null@g' /config/tomcat9/bin/catalina.sh \
     && echo "java.util.logging.ConsoleHandler.encoding = UTF-8" >> /config/tomcat9/conf/logging.properties \
+    && wget https://download.jumpserver.org/public/guacamole-server-1.2.0.tar.gz \
+    && tar -xf guacamole-server-1.2.0.tar.gz \
+    && cd guacamole-server-1.2.0 \
+    && ./configure --with-init-dir=/etc/init.d \
+    && make \
+    && make install \
+    && ldconfig \
+    && cd .. \
+    && wget http://download.jumpserver.org/release/${VERSION}/guacamole-client-${VERSION}.tar.gz \
+    && tar -xf guacamole-client-${VERSION}.tar.gz \
+    && cp guacamole-client-${VERSION}/guacamole-*.war /config/tomcat9/webapps/ROOT.war \
+    && cp guacamole-client-${VERSION}/guacamole-*.jar /config/guacamole/extensions/ \
+    && rm -rf guacamole-server-1.2.0 guacamole-server-1.2.0.tar.gz guacamole-client-${VERSION} guacamole-client-${VERSION}.tar.gz \
     && yum clean all \
     && rm -rf /var/cache/yum/*
 
@@ -58,22 +72,11 @@ RUN set -ex \
     && pip install --upgrade pip setuptools \
     && pip install -r /opt/jumpserver/requirements/requirements.txt \
     && cd guacamole \
-    && tar xf guacamole-server-1.2.0.tar.gz \
-    && cd guacamole-server-1.2.0 \
-    && autoreconf -fi \
-    && ./configure --with-init-dir=/etc/init.d \
-    && make \
-    && make install \
-    && cd .. \
-    && ln -sf /opt/guacamole/guacamole-1.0.0.war /config/tomcat9/webapps/ROOT.war \
-    && ln -sf /opt/guacamole/guacamole-auth-jumpserver-1.0.0.jar /config/guacamole/extensions/guacamole-auth-jumpserver-1.0.0.jar \
-    && ln -sf /opt/guacamole/root/app/guacamole/guacamole.properties /config/guacamole/guacamole.properties \
-    && rm -rf guacamole-server-1.2.0 \
-    && tar xf ssh-forward.tar.gz -C /bin/ \
+    && mv /opt/guacamole/guacamole.properties /config/guacamole/ \
+    && wget https://download.jumpserver.org/public/ssh-forward.tar.gz \
+    && tar -xf ssh-forward.tar.gz -C /bin/ \
     && chmod 755 /bin/ssh-forward \
-    && ldconfig \
     && cd /opt \
-    && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/${VERSION}/jumpserver.conf \
     && yum clean all \
     && rm -rf /var/cache/yum/* \
     && rm -rf /opt/*.tar.gz \
