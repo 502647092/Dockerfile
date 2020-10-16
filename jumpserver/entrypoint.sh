@@ -30,6 +30,7 @@ if [ ! -f "/opt/jumpserver/config.yml" ]; then
     sed -i "s/REDIS_PORT: 6379/REDIS_PORT: $REDIS_PORT/g" /opt/jumpserver/config.yml
     sed -i "s/# REDIS_PASSWORD: /REDIS_PASSWORD: $REDIS_PASSWORD/g" /opt/jumpserver/config.yml
     sed -i "s/# WINDOWS_SKIP_ALL_MANUAL_PASSWORD: False/WINDOWS_SKIP_ALL_MANUAL_PASSWORD: True/g" /opt/jumpserver/config.yml
+    sed -i "s/localhost:8081/guacamole:8080/g" /etc/nginx/conf.d/jumpserver.conf
 fi
 
 if [ ! -f "/opt/koko/config.yml" ]; then
@@ -56,7 +57,7 @@ if [[ -n "${STEP_START}" ]]; then
         sleep 5
     done
 else
-    ./jms start all &
+    ./jms start -d
 fi
 echo "Wait for jumpserver ready..."
 while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "302" ]; do
@@ -64,7 +65,7 @@ while [ "$(curl -I -m 10 -o /dev/null -s -w %{http_code} 127.0.0.1:8080)" != "30
 done
 echo "Jumpserver is ready at 8080."
 echo "Starting koko & tomcat9 & nginx ..."
-cd /opt/koko && ./koko &
+cd /opt/koko && ./koko -d
 /etc/init.d/guacd start
 sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
