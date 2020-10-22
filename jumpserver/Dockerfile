@@ -2,7 +2,7 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=v2.4.0 \
+ENV VERSION=v2.4.1 \
     LANG=en_US.utf8
 
 RUN set -ex \
