@@ -66,8 +66,6 @@ done
 echo "Jumpserver is ready at 8080."
 echo "Starting koko & tomcat9 & nginx ..."
 cd /opt/koko && ./koko -d
-/etc/init.d/guacd start
-sh /config/tomcat9/bin/startup.sh
 /usr/sbin/nginx &
 sleep 3
 echo "Jumpserver ALL ${VERSION} start finish."
