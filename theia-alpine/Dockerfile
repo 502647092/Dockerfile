@@ -1,6 +1,6 @@
 
 FROM miaowoo/development:alpine AS builder
-RUN apk add --no-cache make gcc g++ python python-dev libsecret libsecret-dev curl
+RUN apk add --no-cache make gcc g++ python3 python3-dev libsecret libsecret-dev curl && ln -sf /usr/bin/python3 /usr/bin/python
 ARG version=latest
 WORKDIR /home
 ADD . .
@@ -19,6 +19,7 @@ RUN set -ex && \
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \
     echo *.ts.map >> .yarnclean && \
+    echo *.js.map >> .yarnclean && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
     yarn cache clean
