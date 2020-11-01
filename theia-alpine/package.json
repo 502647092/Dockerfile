@@ -6,7 +6,6 @@
         "@theia/editor-preview": "next",
         "@theia/plugin-dev": "next",
         "@theia/plugin-ext-vscode": "next",
-        "@theia/json": "next",
         "@theia/git": "next",
         "@theia/vsx-registry": "next"
     },
@@ -57,12 +56,13 @@
         "@theia/vscode-builtin-handlebars",
         "@theia/vscode-builtin-hlsl",
         "@theia/vscode-builtin-html",
+        "@theia/vscode-builtin-html-language-features",
         "@theia/vscode-builtin-ini",
         "@theia/vscode-builtin-jake",
         "@theia/vscode-builtin-java",
         "@theia/vscode-builtin-javascript",
         "@theia/vscode-builtin-json",
-        "#@theia/vscode-builtin-json-language-features",
+        "@theia/vscode-builtin-json-language-features",
         "@theia/vscode-builtin-less",
         "@theia/vscode-builtin-log",
         "@theia/vscode-builtin-lua",
@@ -101,7 +101,6 @@
     ],
     "adapters": {
         "vscode-builtin-typescript-language-features": "https://open-vsx.org/api/vscode/typescript-language-features/1.44.2/file/vscode.typescript-language-features-1.44.2.vsix",
-        "vscode-builtin-html-language-features": "https://open-vsx.org/api/vscode/html-language-features/1.45.1/file/vscode.html-language-features-1.45.1.vsix",
         "vscode-builtin-markdown-language-features": "https://open-vsx.org/api/vscode/markdown-language-features/1.39.1/file/vscode.markdown-language-features-1.39.1.vsix",
         "vscode-builtin-npm": "https://open-vsx.org/api/vscode/npm/1.44.2/file/vscode.npm-1.44.2.vsix"
     }
