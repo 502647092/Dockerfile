@@ -2,7 +2,7 @@ FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=v2.4.3 \
+ENV VERSION=v2.5.0 \
     LANG=en_US.utf8
 
 RUN set -ex \
@@ -52,7 +52,8 @@ RUN set -ex \
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod +x /bin/entrypoint.sh
 
-VOLUME /opt/jumpserver/data/media
+VOLUME /opt/jumpserver/data
+VOLUME /opt/koko/data
 
 ENV SECRET_KEY=kWQdmdCQKjaWlHYpPhkNQDkfaRulM6YnHctsHLlSPs8287o2kW \
     BOOTSTRAP_TOKEN=KXOeyNgDeTdpeu9q \
