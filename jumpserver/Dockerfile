@@ -1,4 +1,4 @@
-FROM centos:7
+FROM registry.yumc.pw/centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
