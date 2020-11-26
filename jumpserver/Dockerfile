@@ -2,7 +2,7 @@ FROM registry.yumc.pw/centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=v2.5.1 \
+ENV VERSION=v2.5.2 \
     LANG=en_US.utf8
 
 RUN set -ex \

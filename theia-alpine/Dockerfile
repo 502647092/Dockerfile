@@ -1,5 +1,5 @@
 
-FROM miaowoo/development:alpine AS builder
+FROM registry.cn-hangzhou.aliyuncs.com/miaowoo/development:alpine AS builder
 RUN apk add --no-cache make gcc g++ python3 python3-dev libsecret libsecret-dev curl && ln -sf /usr/bin/python3 /usr/bin/python
 ARG version=latest
 WORKDIR /home
@@ -24,7 +24,7 @@ RUN set -ex && \
     yarn autoclean --force && \
     yarn cache clean
 
-FROM miaowoo/development:alpine
+FROM registry.cn-hangzhou.aliyuncs.com/miaowoo/development:alpine
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /home/theia
