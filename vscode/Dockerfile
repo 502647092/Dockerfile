@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/miaowoo/development
+FROM registry.cn-hangzhou.aliyuncs.com/miaowoo/development:alpine
 
 RUN npm install --unsafe-perm -g code-server
 
