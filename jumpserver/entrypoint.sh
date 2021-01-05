@@ -43,7 +43,7 @@ if [ ! -f "/opt/koko/config.yml" ]; then
     sed -i "s/# REDIS_PORT: 6379/REDIS_PORT: $REDIS_PORT/g" /opt/koko/config.yml
     sed -i "s/# REDIS_PASSWORD:/REDIS_PASSWORD: $REDIS_PASSWORD/g" /opt/koko/config.yml
     sed -i "s/# REDIS_DB_ROOM:/REDIS_DB_ROOM: 6/g" /opt/koko/config.yml
-    echo "ENABLE_PROXY_PROTOCOL: true" >> /opt/koko/config.yml
+    echo -e "\n\nENABLE_PROXY_PROTOCOL: true" >> /opt/koko/config.yml
 fi
 
 source /opt/py3/bin/activate
