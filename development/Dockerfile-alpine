@@ -22,7 +22,7 @@ RUN apk add --no-cache \
     # Go
     go musl-dev \
     # Java
-    openjdk8 maven gradle \
+    openjdk11 maven gradle \
     # Python
     python3 python3-dev py3-pip \
     # PHP \
