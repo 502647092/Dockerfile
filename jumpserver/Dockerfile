@@ -2,8 +2,7 @@ FROM registry.yumc.pw/centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
-ENV VERSION=v2.13.0 \
-    LANG=en_US.utf8
+ENV LANG=en_US.utf8
 
 RUN set -ex \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -14,7 +13,7 @@ RUN set -ex \
     && yum -y install bash-completion wget epel-release yum-utils python36 python36-devel libtool \
     && echo -e "[nginx-stable]\nname=nginx stable repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=1\nenabled=1\ngpgkey=https://nginx.org/keys/nginx_signing.key" > /etc/yum.repos.d/nginx.repo \
     && rpm --import https://nginx.org/keys/nginx_signing.key \
-    && yum -y install nginx \
+    && yum -y install nginx jq \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/latest/jumpserver.conf \
     && yum clean all \
@@ -22,6 +21,7 @@ RUN set -ex \
 
 RUN set -ex \
     && mkdir -p jumpserver koko lina luna kubectl-aliases \
+    && VERSION=`curl -qs https://api.github.com/repos/jumpserver/jumpserver/releases/latest | jq -r .name` \
     && wget -O- https://github.com/jumpserver/jumpserver/releases/download/${VERSION}/jumpserver-${VERSION}.tar.gz | tar -xzC jumpserver --strip-components=1 \
     && wget -O- https://github.com/jumpserver/koko/releases/download/${VERSION}/koko-${VERSION}-linux-amd64.tar.gz | tar -xzC koko --strip-components=1 \
     && wget -O- https://github.com/jumpserver/lina/releases/download/${VERSION}/lina-${VERSION}.tar.gz | tar -xzC lina --strip-components=1 \
