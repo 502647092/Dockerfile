@@ -1,7 +1,5 @@
 #!/bin/env sh
 
-set -e
-
 ROBOT_NAME=${ROBOT_NAME:?机器人名称不得为空!}
 
 RUNNING_URL=${RUNNING_URL:?推送地址不得为空!}
@@ -53,6 +51,10 @@ start() {
     go-cqhttp faststart &
     log "等待登录完成..."
     while [[ "$(curl -m 2 -s -w %{http_code} 127.0.0.1:${VIRTUAL_PORT})" == "000" ]]; do
+        if [[ -z "$(ps -ef | grep go-cqhttp | grep faststart)" ]]; then
+            ps -ef
+            stop "process go-cqhttp not found exit..."
+        fi
         sleep 2
     done
     running_status

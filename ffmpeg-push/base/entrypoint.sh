@@ -1,7 +1,5 @@
 #!/bin/env sh
 
-set -e
-
 cd ~
 echo "运行目录: $(pwd)"
 
@@ -96,8 +94,9 @@ while :; do
     fi
     STATUS=$(echo ${CHECK_RESULT} | grep 200)
     if [[ -z "${STATUS}" ]]; then
+        log "check URL return code not eq 200 RESULT: ${CHECK_RESULT}"
         let CHECK_ERROR_COUNT++
-        if [[ ${CHECK_ERROR_COUNT} -ge 20 ]]; then
+        if [[ ${CHECK_ERROR_COUNT} -ge 12 ]]; then
             curl -s "${CHECK_URL}"
             stop "check URL return code not eq 200 and CHECK_ERROR_COUNT: ${CHECK_ERROR_COUNT} exit..."
         fi
