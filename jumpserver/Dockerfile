@@ -16,9 +16,9 @@ RUN set -ex \
     && yum -y install nginx jq \
     && rm -rf /etc/nginx/conf.d/default.conf \
     && wget -O /etc/nginx/conf.d/jumpserver.conf https://raw.githubusercontent.com/jumpserver/docker-web/master/http_server.conf \
-    && sed -i "s/koko:5000/localhost:5000/g" /etc/nginx/conf.d/jumpserver.conf
-    && sed -i "s/core:8070/localhost:8070/g" /etc/nginx/conf.d/jumpserver.conf
-    && sed -i "s/core:8080/localhost:8080/g" /etc/nginx/conf.d/jumpserver.conf
+    && sed -i "s/koko:5000/localhost:5000/g" /etc/nginx/conf.d/jumpserver.conf \
+    && sed -i "s/core:8070/localhost:8070/g" /etc/nginx/conf.d/jumpserver.conf \
+    && sed -i "s/core:8080/localhost:8080/g" /etc/nginx/conf.d/jumpserver.conf \
     && yum clean all \
     && rm -rf /var/cache/yum/*
 
