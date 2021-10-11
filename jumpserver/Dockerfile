@@ -1,4 +1,4 @@
-FROM registry.yumc.pw/centos:7
+FROM centos:7
 LABEL maintainer "MiaoWoo(admin@yumc.pw)"
 WORKDIR /opt
 
@@ -15,7 +15,10 @@ RUN set -ex \
     && rpm --import https://nginx.org/keys/nginx_signing.key \
     && yum -y install nginx jq \
     && rm -rf /etc/nginx/conf.d/default.conf \
-    && wget -O /etc/nginx/conf.d/jumpserver.conf https://demo.jumpserver.org/download/nginx/conf.d/latest/jumpserver.conf \
+    && wget -O /etc/nginx/conf.d/jumpserver.conf https://raw.githubusercontent.com/jumpserver/docker-web/master/http_server.conf \
+    && sed -i "s/koko:5000/localhost:5000/g" /etc/nginx/conf.d/jumpserver.conf
+    && sed -i "s/core:8070/localhost:8070/g" /etc/nginx/conf.d/jumpserver.conf
+    && sed -i "s/core:8080/localhost:8080/g" /etc/nginx/conf.d/jumpserver.conf
     && yum clean all \
     && rm -rf /var/cache/yum/*
 
