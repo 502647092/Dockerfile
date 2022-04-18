@@ -15,8 +15,8 @@ RUN apk add --no-cache \
     # Base Package
     git ttf-freefont tzdata ca-certificates \
     zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
-    # vscode Package \
-    alpine-sdk libstdc++ libc6-compat
+    # vscode Package
+    alpine-sdk libstdc++ libc6-compat \
     # Build tools
     make g++ libx11-dev libxkbfile-dev libsecret libsecret-dev \
     # Theia NodeJS
