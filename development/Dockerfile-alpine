@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.15
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
@@ -15,8 +15,6 @@ RUN apk add --no-cache \
     # Base Package
     git ttf-freefont tzdata ca-certificates \
     zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
-    # vscode Package
-    alpine-sdk libstdc++ libc6-compat \
     # Build tools
     make g++ libx11-dev libxkbfile-dev libsecret libsecret-dev \
     # Theia NodeJS
