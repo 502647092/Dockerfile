@@ -10,7 +10,7 @@ LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 WORKDIR /root
 COPY --from=builder /root/go-cqhttp /usr/bin/go-cqhttp
-RUN apk add --no-cache curl ffmpeg tzdata && \
+RUN apk add --no-cache curl ffmpeg tzdata gettext && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     chmod a+x /usr/bin/go-cqhttp
