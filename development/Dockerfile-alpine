@@ -6,8 +6,9 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     # Golang alpine default install at /usr/lib/go
     GOROOT=/usr/lib/go \
     GOPATH=/home/theia/go \
-    RUSTUP_HOME=~/.cargo \
-    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin:${RUSTUP_HOME}/bin \
+    RUSTUP_HOME=${HOME}/.rustup \
+    CARGO_HOME=${HOME}/.cargo \
+    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin:${RUSTUP_HOME}/bin:${CARGO_HOME}/bin \
     SHELL=/bin/zsh
 
 ##GO
@@ -35,7 +36,8 @@ RUN apk add --no-cache \
     ln -sf /usr/bin/python3 /usr/bin/python
 
 # Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
+    && rustup default stable
 
 # Python
 RUN pip install python-language-server autopep8 pylint
