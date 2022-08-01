@@ -6,9 +6,9 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     # Golang alpine default install at /usr/lib/go
     GOROOT=/usr/lib/go \
     GOPATH=/home/theia/go \
-    RUSTUP_HOME=${HOME}/.rustup \
-    CARGO_HOME=${HOME}/.cargo \
-    PATH=$PATH:${GOROOT}/bin:${GOPATH}/bin:${RUSTUP_HOME}/bin:${CARGO_HOME}/bin \
+    # Rust
+    RUSTUP_HOME=/root/.rustup \
+    CARGO_HOME=/root/.cargo \
     SHELL=/bin/zsh
 
 ##GO
@@ -37,6 +37,7 @@ RUN apk add --no-cache \
 
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
+    && source "${CARGO_HOME}/env"
     && rustup default stable
 
 # Python
