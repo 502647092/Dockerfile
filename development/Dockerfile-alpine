@@ -37,7 +37,7 @@ RUN apk add --no-cache \
 
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
-    && source "${CARGO_HOME}/env"
+    && source "${CARGO_HOME}/env" \
     && rustup default stable
 
 # Python
