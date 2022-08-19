@@ -57,7 +57,7 @@ start() {
     log "开始启动机器人..."
     go-cqhttp faststart &
     log "等待登录完成..."
-    while [[ "$(curl -m 2 -s -w %{http_code} http://127.0.0.1:${VIRTUAL_PORT}?access_token=${GOCQ_ACCESS_TOKEN})" == "000" ]]; do
+    while [[ "$(curl -m 2 -s -w %{http_code} http://127.0.0.1:5700?access_token=${GOCQ_ACCESS_TOKEN} -o /dev/null)" == "000" ]]; do
         if [[ -z "$(ps -ef | grep go-cqhttp | grep faststart)" ]]; then
             ps -ef
             stop "process go-cqhttp not found exit..."

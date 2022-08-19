@@ -1,11 +1,10 @@
-FROM alpine:3.15
+FROM alpine:3.16
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     # Golang alpine default install at /usr/lib/go
     GOROOT=/usr/lib/go \
-    GOPATH=/home/theia/go \
     # Rust
     RUSTUP_HOME=/root/.rustup \
     CARGO_HOME=/root/.cargo \
