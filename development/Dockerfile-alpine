@@ -23,14 +23,14 @@ RUN apk add --no-cache \
     # Go
     go musl-dev \
     # Java
-    openjdk11 maven gradle \
+    maven gradle \
     # Python
     python3 python3-dev py3-pip \
     # PHP \
-    php php7-xml php7-zip php7-dom \
-    php-json php-phar php7-zlib php7-curl \
-    php7-gd php7-ctype php-iconv php-openssl php-mbstring \
-    php7-fileinfo php7-simplexml php7-xmlwriter php7-xmlreader php7-tokenizer && \
+    php php-xml php-zip php-dom \
+    php-json php-phar php-zlib php-curl \
+    php-gd php-ctype php-iconv php-openssl php-mbstring \
+    php-fileinfo php-simplexml php-xmlwriter php-xmlreader php-tokenizer && \
     # link python exec to python3
     ln -sf /usr/bin/python3 /usr/bin/python
 
