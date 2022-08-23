@@ -8,7 +8,8 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     # Rust
     RUSTUP_HOME=/root/.rustup \
     CARGO_HOME=/root/.cargo \
-    SHELL=/bin/zsh
+    SHELL=/bin/zsh \
+    PHP_VERSION=81
 
 ##GO
 #Required to use go get with git source
@@ -27,10 +28,10 @@ RUN apk add --no-cache \
     # Python
     python3 python3-dev py3-pip \
     # PHP \
-    php php-xml php-zip php-dom \
-    php-json php-phar php-zlib php-curl \
-    php-gd php-ctype php-iconv php-openssl php-mbstring \
-    php-fileinfo php-simplexml php-xmlwriter php-xmlreader php-tokenizer && \
+    php${PHP_VERSION} php${PHP_VERSION}-xml php${PHP_VERSION}-zip php${PHP_VERSION}-dom \
+    php${PHP_VERSION}-json php${PHP_VERSION}-phar php${PHP_VERSION}-zlib php${PHP_VERSION}-curl \
+    php${PHP_VERSION}-gd php${PHP_VERSION}-ctype php${PHP_VERSION}-iconv php${PHP_VERSION}-openssl php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-fileinfo php${PHP_VERSION}-simplexml php${PHP_VERSION}-xmlwriter php${PHP_VERSION}-xmlreader php${PHP_VERSION}-tokenizer && \
     # link python exec to python3
     ln -sf /usr/bin/python3 /usr/bin/python
 
