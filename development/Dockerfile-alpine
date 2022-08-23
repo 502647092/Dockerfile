@@ -45,7 +45,7 @@ RUN pip install python-language-server autopep8 pylint
 
 # PHP
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php${PHP_VERSION} composer-setup.php --install-dir=/usr/bin --filename=composer \
     && rm composer-setup.php
 
 # Install Tmux Config & On-My-ZSH
