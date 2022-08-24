@@ -33,7 +33,9 @@ RUN apk add --no-cache \
     php${PHP_VERSION}-gd php${PHP_VERSION}-ctype php${PHP_VERSION}-iconv php${PHP_VERSION}-openssl php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-fileinfo php${PHP_VERSION}-simplexml php${PHP_VERSION}-xmlwriter php${PHP_VERSION}-xmlreader php${PHP_VERSION}-tokenizer && \
     # link python exec to python3
-    ln -sf /usr/bin/python3 /usr/bin/python
+    ln -sf /usr/bin/python3 /usr/bin/python && \
+    # link php exec to php${PHP_VERSION}
+    ln -sf /usr/bin/php${PHP_VERSION} /usr/bin/php
 
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
@@ -45,7 +47,7 @@ RUN pip install python-language-server autopep8 pylint
 
 # PHP
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
-    && php${PHP_VERSION} composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && rm composer-setup.php
 
 # Install Tmux Config & On-My-ZSH
