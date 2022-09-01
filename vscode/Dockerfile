@@ -1,6 +1,6 @@
 FROM registry.cn-hangzhou.aliyuncs.com/miaowoo/development:alpine
 
-RUN yarn global add code-server
+RUN npm install --global code-server --unsafe-perm
 
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod +x /bin/entrypoint.sh
