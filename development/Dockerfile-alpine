@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:edge
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
@@ -9,7 +9,7 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     RUSTUP_HOME=/root/.rustup \
     CARGO_HOME=/root/.cargo \
     SHELL=/bin/zsh \
-    PHP_VERSION=81
+    PHP_VERSION=82
 
 ##GO
 #Required to use go get with git source
