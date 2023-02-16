@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.16
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
@@ -9,7 +9,7 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     RUSTUP_HOME=/root/.rustup \
     CARGO_HOME=/root/.cargo \
     SHELL=/bin/zsh \
-    PHP_VERSION=82
+    PHP_VERSION=81
 
 ##GO
 #Required to use go get with git source
@@ -49,6 +49,11 @@ RUN pip install python-language-server autopep8 pylint
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && rm composer-setup.php
+
+# PHP-CS-Fixer
+RUN mkdir -p /usr/local/php-cs-fixer \
+    && composer require --working-dir=/usr/local/php-cs-fixer friendsofphp/php-cs-fixer \
+    && ln -sf /usr/local/php-cs-fixer/vendor/bin/php-cs-fixer /usr/bin/php-cs-fixer
 
 # Install Tmux Config & On-My-ZSH
 RUN set -ex && \
