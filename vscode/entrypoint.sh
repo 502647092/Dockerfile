@@ -7,4 +7,5 @@ auth: ${CDR_AUTH:-password}
 password: ${CDR_PASSWORD:-${RANDOM}${RANDOM}}
 cert: ${CDR_CERT:-false}
 EOF
-code-server
+
+exec "$@"

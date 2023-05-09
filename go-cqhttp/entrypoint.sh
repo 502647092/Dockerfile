@@ -48,8 +48,10 @@ trap _kill SIGINT SIGQUIT SIGTERM
 
 start() {
     log "复制通用配置文件..."
-    if [[ -f "../config.yml" ]]; then
-        cat ../config.yml | envsubst > config.yml
+    if [[ ! -f "config.yml" ]]; then
+      if [[ -f "../config.yml" ]]; then
+          cat ../config.yml | envsubst > config.yml
+      fi
     fi
     if [[ ! -f "config.yml" ]]; then
         stop "未找到配置文件."

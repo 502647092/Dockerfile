@@ -4,6 +4,10 @@ cd ~
 echo "运行目录: $(pwd)"
 
 TYPE=${TYPE:-image}
+BV=${BV:-1000}
+VCODEC=${VCODEC:-copy}
+ACODEC=${ACODEC:-copy}
+F=${F:-flv}
 SOURCE=${SOURCE:?数据源不得为空!}
 TARGET=${TARGET:?推流目标不得为空!}
 
@@ -17,13 +21,14 @@ FFMPEG_ERROR_COUNT=0
 echo "推流类型: ${TYPE}"
 echo "素材地址: ${SOURCE}"
 echo "推流地址: ${TARGET}"
+echo "推流参数: BV: ${BV} VCODEC: ${VCODEC} VCODEC: ${VCODEC} F: ${F} "
 
 update_status() {
     log "${2:-''}$(curl -s "${REPORT_URL}/status/${1}")"
 }
 
 pushing_status() {
-    log "$(curl -s "${PUSH_URL}/status/${1}")"
+    log "$(curl -s "${PUSH_URL}")"
 }
 
 log() {
@@ -50,7 +55,8 @@ _kill() {
 trap _kill SIGINT SIGQUIT SIGTERM
 
 push() {
-    ffmpeg -re -stream_loop -1 -i ${SOURCE} -vcodec copy -acodec copy -f flv -y "${TARGET}" 2> ffmpeg.log & 
+    echo "ffmpeg -re -stream_loop -1 -i ${SOURCE} -b:v ${BV}K -vcodec ${VCODEC} -acodec ${ACODEC} -f ${F} -y ${TARGET}"
+    ffmpeg -re -stream_loop -1 -i ${SOURCE} -b:v ${BV}K -vcodec ${VCODEC} -acodec ${ACODEC} -f ${F} -y "${TARGET}" 2> ffmpeg.log & 
 }
 
 restart() {
@@ -68,7 +74,7 @@ fi
 
 if [[ "$TYPE" == "image" ]]; then
     update_status downloading "素材下载中..."
-    wget -qO image.png ${SOURCE} > /dev/null
+    axel -n 10 -o image.png ${SOURCE} > /dev/null
     if [[ ! -f "image.png" ]]; then
       stop "素材下载失败 请检查图片地址是否正确!"
     fi
@@ -78,6 +84,27 @@ if [[ "$TYPE" == "image" ]]; then
       stop "素材转换失败 请检查图片是否为标准PNG格式文件!"
     fi
     SOURCE=push.mp4
+    pushing_status
+fi
+
+if [[ "$TYPE" == "video" && "${SOURCE:0:1}" != "/" && "${SOURCE_UUID}" != "" ]]; then
+    if [[ -f "/data/${SOURCE_UUID}.st" ]]; then
+        rm -rf /data/${SOURCE_UUID}.st
+        rm -rf /data/${SOURCE_UUID}
+    fi
+    if [[ ! -f "/data/${SOURCE_UUID}" ]]; then
+        update_status downloading "素材下载中..."
+        axel -n 10 -o /data/${SOURCE_UUID} ${SOURCE}
+        if [[ "$?" != "0" ]]; then
+            stop "素材下载失败 请检查视频地址是否正确."
+            rm -rf /data/${SOURCE_UUID}.st
+            rm -rf /data/${SOURCE_UUID}
+        fi
+        if [[ ! -f "/data/${SOURCE_UUID}" ]]; then
+            stop "素材下载失败 请检查视频地址是否正确."
+        fi
+    fi
+    SOURCE=/data/${SOURCE_UUID}
     pushing_status
 fi
 
@@ -110,7 +137,7 @@ while :; do
         if [[ ${FFMPEG_ERROR_COUNT} -ge 3 ]]; then
             ps -ef
             tail -n 20 ffmpeg.log
-            stop "process ffmpeg not found exit..."
+            stop "推流进程被平台关闭 请检查图片/视频/账户是否存在问题..."
         fi
         restart
         sleep 20

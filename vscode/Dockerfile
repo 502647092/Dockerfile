@@ -7,3 +7,4 @@ RUN chmod +x /bin/entrypoint.sh
 
 EXPOSE 8080
 ENTRYPOINT ["entrypoint.sh"]
+CMD ["code-server"]
