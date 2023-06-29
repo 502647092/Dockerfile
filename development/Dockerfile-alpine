@@ -1,4 +1,4 @@
-FROM registry.cn-hongkong.aliyuncs.com/miaowoo/alpine:3.18
+FROM registry.cn-hongkong.aliyuncs.com/miaowoo/node:16-alpine3.18
 LABEL MAINTAINER="MiaoWoo(admin@yumc.pw)"
 
 # Java alpine default install at /usr/lib/jvm/default-jvm
@@ -34,14 +34,6 @@ RUN apk add --no-cache \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     # link php exec to php${PHP_VERSION}
     ln -sf /usr/bin/php${PHP_VERSION} /usr/bin/php
-
-# lock old node version
-RUN mv /etc/apk/repositories /etc/apk/repositories.bak \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/main" > /etc/apk/repositories \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/community" >> /etc/apk/repositories \
-    && apk add nodejs yarn npm --no-cache \
-    && rm -rf /etc/apk/repositories \
-    && mv /etc/apk/repositories.bak /etc/apk/repositories
 
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
