@@ -11,6 +11,14 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     SHELL=/bin/zsh \
     PHP_VERSION=81
 
+# lock old node version
+RUN mv /etc/apk/repositories /etc/apk/repositories.bak \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/main" > /etc/apk/repositories \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/community" >> /etc/apk/repositories \
+    && apk add nodejs yarn npm --no-cache \
+    && rm -rf /etc/apk/repositories \
+    && mv /etc/apk/repositories.bak /etc/apk/repositories
+
 ##GO
 #Required to use go get with git source
 RUN apk add --no-cache \
@@ -19,8 +27,6 @@ RUN apk add --no-cache \
     zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
     # Build tools
     make g++ libx11-dev libxkbfile-dev libsecret libsecret-dev \
-    # Theia NodeJS
-    nodejs yarn npm \
     # Go
     go musl-dev \
     # Java
