@@ -11,14 +11,6 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
     SHELL=/bin/zsh \
     PHP_VERSION=81
 
-# lock old node version
-RUN mv /etc/apk/repositories /etc/apk/repositories.bak \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/main" > /etc/apk/repositories \
-    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/community" >> /etc/apk/repositories \
-    && apk add nodejs yarn npm --no-cache \
-    && rm -rf /etc/apk/repositories \
-    && mv /etc/apk/repositories.bak /etc/apk/repositories
-
 ##GO
 #Required to use go get with git source
 RUN apk add --no-cache \
@@ -43,6 +35,14 @@ RUN apk add --no-cache \
     # link php exec to php${PHP_VERSION}
     ln -sf /usr/bin/php${PHP_VERSION} /usr/bin/php
 
+# lock old node version
+RUN mv /etc/apk/repositories /etc/apk/repositories.bak \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/main" > /etc/apk/repositories \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.16/community" >> /etc/apk/repositories \
+    && apk add nodejs yarn npm --no-cache \
+    && rm -rf /etc/apk/repositories \
+    && mv /etc/apk/repositories.bak /etc/apk/repositories
+
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
     && source "${CARGO_HOME}/env" \
@@ -54,10 +54,9 @@ RUN pip install python-language-server autopep8 pylint
 # PHP
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
-    && rm composer-setup.php
-
-# PHP-CS-Fixer
-RUN mkdir -p /usr/local/php-cs-fixer \
+    && rm composer-setup.php \
+    # PHP-CS-Fixer
+    && mkdir -p /usr/local/php-cs-fixer \
     && composer require --working-dir=/usr/local/php-cs-fixer friendsofphp/php-cs-fixer \
     && ln -sf /usr/local/php-cs-fixer/vendor/bin/php-cs-fixer /usr/bin/php-cs-fixer
 
