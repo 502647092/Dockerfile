@@ -14,6 +14,7 @@ ENV JAVA_HOME=/usr/lib/jvm/default-jvm \
 ##GO
 #Required to use go get with git source
 RUN apk add --no-cache \
+    alpine-sdk libstdc++ libc6-compat \
     # Base Package
     git ttf-freefont tzdata ca-certificates \
     zsh tmux nano bash tzdata openssh openssl curl inotify-tools \
@@ -33,7 +34,11 @@ RUN apk add --no-cache \
     # link python exec to python3
     ln -sf /usr/bin/python3 /usr/bin/python && \
     # link php exec to php${PHP_VERSION}
-    ln -sf /usr/bin/php${PHP_VERSION} /usr/bin/php
+    ln -sf /usr/bin/php${PHP_VERSION} /usr/bin/php && \
+    # config nodejs
+    npm config set python python3 && \
+    corepack enable && \
+    corepack prepare pnpm@latest --activate
 
 # Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y -v \
