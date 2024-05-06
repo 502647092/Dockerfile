@@ -1,4 +1,4 @@
-# DOCKER_BUILDKIT=1 docker build -t miaowoo/ffmpeg-push-base:v2.1 .
+# DOCKER_BUILDKIT=1 docker build -t miaowoo/ffmpeg-push-base:v2.3 .
 FROM alpine
 
 RUN apk add --no-cache wget curl ffmpeg tzdata axel && \

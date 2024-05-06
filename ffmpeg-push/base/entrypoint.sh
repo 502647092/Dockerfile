@@ -64,6 +64,26 @@ restart() {
     push
 }
 
+axel_download() {
+    local AXEL_SOURCE="${1:?下载地址不得为空}"
+    local AXEL_TARGET="${2:?保存地址不得为空}"
+    update_status downloading "素材下载中..."
+    local RETRY_LOG="axel download result not eq 0 retry."
+    local DOWNLOAD_SUCCESS=false
+    for i in $(seq 1 10); do
+        axel -n 10 -o ${AXEL_TARGET} ${AXEL_SOURCE} > /dev/null
+        if [[ $? -eq 0 ]]; then
+            DOWNLOAD_SUCCESS=true
+            break;
+        fi
+        RETRY_LOG="${RETRY_LOG}."
+        log "${i} ${RETRY_LOG}"
+    done
+    if [[ $DOWNLOAD_SUCCESS != true || ! -f "${AXEL_TARGET}" || -f "${AXEL_TARGET}.st" ]]; then
+        stop "素材下载失败 请检查素材地址是否正确."
+    fi
+}
+
 update_status starting "任务启动中..."
 sleep 1
 touch ffmpeg.log
@@ -73,11 +93,7 @@ if [[ -z "$(curl -s ${CHECK_URL} | grep 200)" ]]; then
 fi
 
 if [[ "$TYPE" == "image" ]]; then
-    update_status downloading "素材下载中..."
-    axel -n 10 -o image.png ${SOURCE} > /dev/null
-    if [[ ! -f "image.png" ]]; then
-      stop "素材下载失败 请检查图片地址是否正确!"
-    fi
+    axel_download ${SOURCE} image.png
     update_status converting "素材转换中..."
     ffmpeg -ss 0 -t 5 -f lavfi -i color=c=0x000000:s=1920x1080:r=30  -i image.png -filter_complex  "[1:v]scale=1920:1080[v1];[0:v][v1]overlay=0:0[outv]"  -map [outv] -c:v libx264 push.mp4 -y #2> /dev/null
     if [[ ! -f "push.mp4" ]]; then
@@ -88,21 +104,8 @@ if [[ "$TYPE" == "image" ]]; then
 fi
 
 if [[ "$TYPE" == "video" && "${SOURCE:0:1}" != "/" && "${SOURCE_UUID}" != "" ]]; then
-    if [[ -f "/data/${SOURCE_UUID}.st" ]]; then
-        rm -rf /data/${SOURCE_UUID}.st
-        rm -rf /data/${SOURCE_UUID}
-    fi
-    if [[ ! -f "/data/${SOURCE_UUID}" ]]; then
-        update_status downloading "素材下载中..."
-        axel -n 10 -o /data/${SOURCE_UUID} ${SOURCE}
-        if [[ "$?" != "0" ]]; then
-            stop "素材下载失败 请检查视频地址是否正确."
-            rm -rf /data/${SOURCE_UUID}.st
-            rm -rf /data/${SOURCE_UUID}
-        fi
-        if [[ ! -f "/data/${SOURCE_UUID}" ]]; then
-            stop "素材下载失败 请检查视频地址是否正确."
-        fi
+    if [[ ! -f "/data/${SOURCE_UUID}" || -f "/data/${SOURCE_UUID}.st" ]]; then
+        axel_download ${SOURCE} "/data/${SOURCE_UUID}"
     fi
     SOURCE=/data/${SOURCE_UUID}
     pushing_status
