@@ -55,8 +55,14 @@ _kill() {
 trap _kill SIGINT SIGQUIT SIGTERM
 
 push() {
+    ffprobe ${SOURCE} > ffprobe.log 2>&1
+    if [[ $? -ne 0 ]]; then
+        cat ffprobe.log
+        rm -rf ${SOURCE}
+        stop "素材校验失败 请检查素材格式是否正确."
+    fi
     echo "ffmpeg -re -stream_loop -1 -i ${SOURCE} -b:v ${BV}K -vcodec ${VCODEC} -acodec ${ACODEC} -f ${F} -y ${TARGET}"
-    ffmpeg -re -stream_loop -1 -i ${SOURCE} -b:v ${BV}K -vcodec ${VCODEC} -acodec ${ACODEC} -f ${F} -y "${TARGET}" 2> ffmpeg.log & 
+    ffmpeg -re -stream_loop -1 -i ${SOURCE} -b:v ${BV}K -vcodec ${VCODEC} -acodec ${ACODEC} -f ${F} -y "${TARGET}" > ffmpeg.log 2>&1 &
 }
 
 restart() {
@@ -139,7 +145,7 @@ while :; do
         let FFMPEG_ERROR_COUNT++
         if [[ ${FFMPEG_ERROR_COUNT} -ge 3 ]]; then
             ps -ef
-            tail -n 20 ffmpeg.log
+            cat ffmpeg.log
             stop "推流进程被平台关闭 请检查图片/视频/账户是否存在问题..."
         fi
         restart
